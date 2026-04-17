@@ -271,16 +271,30 @@ A pesquisa bibliográfica foi realizada nas bases Google Scholar e IEEE Xplore, 
 \section{Fundamentos}
 \label{sec:fundamentos}
 
-Aprofunde os conceitos técnicos que serão utilizados na solução proposta. Diferentemente do referencial teórico (que apresenta conceitos gerais), os fundamentos devem detalhar as tecnologias, algoritmos, frameworks ou metodologias específicas que serão empregados no desenvolvimento.
+Nesta seção, detalham-se os conceitos e as arquiteturas de Redes Neurais Profundas (Deep Learning) que compõem a base tecnológica do sistema de tradução de Libras proposto. A solução utiliza uma abordagem híbrida, empregando Redes Neurais Convolucionais para análise espacial e Redes de Memória de Longo Prazo para análise sequencial.
 
-Por exemplo:
-\begin{itemize}
-    \item Se o trabalho utiliza aprendizado de máquina, explique os algoritmos escolhidos (árvores de decisão, redes neurais, SVM, etc.);
-    \item Se o trabalho envolve desenvolvimento de software, descreva as tecnologias (linguagens, frameworks, bancos de dados);
-    \item Se envolve análise de dados, explique as métricas e técnicas estatísticas que serão aplicadas.
-\end{itemize}
+\textbf{2.3.1 Redes Neurais Convolucionais (CNN)} \\
+As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
 
-Utilize figuras, diagramas e tabelas para ilustrar conceitos quando apropriado.
+O diferencial da CNN reside nas camadas de convolução, que aplicam filtros matemáticos para extrair características hierárquicas da imagem, como bordas, texturas e, finalmente, o formato específico dos dedos. Esse processo permite que o modelo identifique padrões visuais independentemente de pequenas variações de posição ou iluminação.
+
+\textbf{2.3.2 Redes de Memória de Longo Prazo (LSTM)} \\
+Para o reconhecimento de sinais dinâmicos em vídeo, onde o significado do gesto reside no movimento ao longo do tempo, utiliza-se a Long Short-Term Memory (LSTM). A LSTM é uma variante das Redes Neurais Recorrentes (RNN) projetada para superar o problema do desaparecimento do gradiente, permitindo que a rede retenha informações de frames passados por longos períodos.
+
+A arquitetura da LSTM é composta por "portões" (gates) que controlam o fluxo de informação: o que deve ser esquecido, o que deve ser armazenado e o que deve ser passado para o próximo estado. No contexto de Libras, isso permite que o sistema compreenda que a trajetória de um movimento é tão importante quanto a pose final da mão para a tradução correta de uma frase.
+
+\textbf{2.3.3 Processamento de Linguagem Natural (NLP)} \\
+O reconhecimento isolado de gestos não é suficiente para uma comunicação fluida, dada a diferença gramatical entre a Libras e o Português. O módulo de NLP atua na camada de pós-processamento, realizando a conversão semântica e sintática dos sinais identificados. Este fundamento permite que o sistema organize as palavras reconhecidas em frases coerentes, tratando variações de tempo verbal, concordância e estrutura frasal, garantindo que a tradução final seja compreensível para o usuário ouvinte.
+
+\clearpage
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{arquitetura-sistema}
+    \caption{Diagrama de fluxo da solução proposta.}
+\end{figure}
+
+\clearpage
 
 % ---------------------------------------------------------------
 \section{Trabalhos relacionados}
