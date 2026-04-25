@@ -248,7 +248,7 @@ A escolha das arquiteturas utilizadas neste trabalho está diretamente relaciona
 Essa distinção impõe desafios específicos ao processo de tradução automática, exigindo o uso de técnicas capazes de lidar tanto com a análise espacial dos sinais quanto com sua evolução temporal e posterior reorganização linguística. Nesse contexto, são empregadas Redes Neurais Convolucionais para captura de padrões visuais, Redes LSTM para modelagem de sequências de movimento e técnicas de Processamento de Linguagem Natural para adaptação da estrutura gramatical ao português.
 
 
-\textbf{2.3.1 Linguagem da Língua Brasileira de Sinais (Libras)}
+\textbf{2.3.1 Linguagem da Língua Brasileira de Sinais (Libras)} \\
 
 A Língua Brasileira de Sinais (Libras) é uma língua natural, completa e autônoma, utilizada pela comunidade surda no Brasil, reconhecida pela Lei nº 10.436/2002 e regulamentada pelo Decreto nº 5.626/2005 como meio legal de comunicação e expressão. Possui estrutura gramatical própria, independente da Língua Portuguesa, e está inserida em um contexto cultural e linguístico específico da comunidade surda.
 
@@ -262,12 +262,29 @@ No nível sintático, a língua portuguesa segue predominantemente a ordem Sujei
 
 Essas diferenças impactam diretamente o processo de tradução automática. Elementos comuns no português, como artigos e preposições, nem sempre aparecem de forma explícita na Libras, pois muitas dessas relações são expressas pelo uso do espaço e pelo contexto. Por isso, sistemas computacionais precisam não apenas reconhecer os sinais, mas também reorganizar as informações e incluir elementos necessários para gerar frases corretas em português.
 
-\textbf{2.3.2 Redes Neurais Convolucionais (CNN)} \\
+
+\textbf{2.3.2 Visão Computacional} \\
+
+A Visão Computacional (VC) é a ciência que permite que máquinas enxerguem e interpretem o meio à sua volta. Através da captura de imagens por câmeras e sensores, o sistema extrai informações significativas que permitem reconhecer e manipular objetos (MILANO; HONORATO).
+
+Essa tecnologia busca capacitar computadores a compreender o mundo visual de forma similar aos humanos. Segundo a IBM (2026), enquanto a visão humana é intuitiva, as máquinas dependem de algoritmos para converter pixels e dados brutos em conceitos estruturados e compreensíveis.
+
+No desenvolvimento deste projeto, a aplicação da visão computacional concentra-se prioritariamente na detecção de mãos. De acordo com Neves, Vieira Neto e Gonzaga (2012), essa etapa é crucial para localizar e isolar os membros superiores do restante do cenário, garantindo o foco nos sinais.
+
+Outra aplicação fundamental é o reconhecimento de gestos, técnica que visa identificar movimentos e posições corporais a partir de dados visuais. Conforme explicam Pinho, Tavares e Correia (2004), essa análise é o que permite distinguir as diferentes configurações de mão que compõem o léxico da Libras.
+
+Para viabilizar essas aplicações, utilizam-se técnicas de processamento de imagem, que preparam os dados brutos para análise. Segundo Milano e Honorato, procedimentos como filtragem e redução de ruído são fundamentais para que o sistema ignore informações irrelevantes do fundo da imagem.
+
+Por fim, aplica-se a extração de características para identificar padrões relevantes, como o formato e a trajetória das mãos. De acordo com Souza, Magalhães e Pires (2021), essa técnica permite que o sistema identifique pontos específicos, chamados de landmarks, essenciais para a classificação precisa do sinal.
+
+\textbf{2.3.3 Redes Neurais Convolucionais (CNN)} \\
+
 As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
 
 O diferencial da CNN reside nas camadas de convolução, que aplicam filtros matemáticos para extrair características hierárquicas da imagem, como bordas, texturas e formas. De acordo com \citeonline{Fleck2016}, o sucesso dessas redes em tarefas de visão computacional deve-se à sua capacidade de identificar características locais e ao compartilhamento de pesos entre as conexões. Essa configuração garante uma maior invariância a variações de translação e posição do objeto analisado, permitindo que o modelo identifique padrões visuais de forma robusta, mesmo diante de oscilações de iluminação ou enquadramento (\cite{Furtado2019}; \cite{Fleck2016}).
 
-\textbf{2.3.3 Redes de Memória de Longo Prazo (LSTM)} \\
+\textbf{2.3.4 Redes de Memória de Longo Prazo (LSTM)} \\
+
 Para o reconhecimento de sinais dinâmicos em vídeo, onde o significado do gesto reside no movimento ao longo do tempo, utiliza-se a Long Short-Term Memory (LSTM). Esta arquitetura é uma evolução das Redes Neurais Recorrentes (RNN) tradicionais, introduzida por \citeonline{Hochreiter1997} para solucionar a limitação do desaparecimento do gradiente (vanishing gradient), que impede redes comuns de aprenderem dependências de longo prazo em sequências de dados.
 
 O diferencial da LSTM é a sua unidade de memória interna, frequentemente chamada de célula, que permite a manutenção de informações por intervalos de tempo estendidos \cite{Hochreiter1997}. Essa estrutura é fundamental para o aprendizado de sequências complexas, como a linguagem de sinais, onde a predição ou classificação de um gesto depende de frames ocorridos em instantes anteriores \cite{Bayer2009}.
@@ -282,7 +299,7 @@ A arquitetura da LSTM é composta por três componentes principais, conhecidos c
 
 No contexto do tradutor de Libras, essa capacidade de retenção temporal permite que o sistema compreenda que a trajetória e a transição entre as poses das mãos são tão importantes quanto a configuração isolada em um único frame \cite{Almeida2019}. Como destacado por \citeonline{Schmidhuber2014}, a profundidade dessas redes em termos de passos temporais possibilita a extração de representações abstratas que conectam movimentos manuais a conceitos semânticos complexos, garantindo maior precisão na interpretação de sinais dinâmicos.
 
-\textbf{2.3.4 Processamento de Linguagem Natural (NLP)} \\
+\textbf{2.3.5 Processamento de Linguagem Natural (NLP)} \\
 O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto quanto de voz. Segundo a \citeonline{IBM2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
 
 No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão computacional não é suficiente para uma comunicação fluida, dada a profunda divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam \citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite que o sistema lide com a ambiguidade inerente à linguagem e aprenda representações hierárquicas dos dados textuais. O módulo de NLP atua, portanto, como uma camada de pós-processamento essencial, realizando a conversão semântica e sintática dos sinais identificados pela rede neural.
@@ -294,6 +311,14 @@ Para isso, aplicam-se técnicas de processamento que ajustam a sintaxe e a gram�
 Paralelamente, o módulo assegura a integridade semântica da tradução, garantindo que o sentido original da mensagem seja preservado durante a conversão entre as modalidades. 
 
 Por fim, o tratamento de variações linguísticas resolve questões essenciais de concordância nominal e verbal, além de refinar a estrutura frasal, resultando em uma saída de texto ou fala que seja natural e compreensível para o usuário ouvinte \cite{Lopez2017}.
+
+\textbf{2.3.6 Deep Learning} \\
+
+\textbf{2.3.7 Reconhecimento de Gestos (Gesture Recognition)} \\
+
+\textbf{2.3.8 Integração Visão Computacional + NLP} \\
+
+
 
 \clearpage
 
