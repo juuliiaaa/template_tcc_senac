@@ -243,14 +243,31 @@ A pesquisa bibliográfica foi realizada nas bases Google Scholar e IEEE Xplore, 
 \section{Fundamentos}
 \label{sec:fundamentos}
 
-Nesta seção, detalham-se os conceitos e as arquiteturas de Redes Neurais Profundas (Deep Learning) que compõem a base tecnológica do sistema de tradução de Libras proposto. A solução utiliza uma abordagem híbrida, empregando Redes Neurais Convolucionais para análise espacial e Redes de Memória de Longo Prazo para análise sequencial.
+A escolha das arquiteturas utilizadas neste trabalho está diretamente relacionada às diferenças estruturais entre a Língua Brasileira de Sinais (Libras) e a Língua Portuguesa, discutidas na revisão bibliográfica. Enquanto o português apresenta uma organização linear e sequencial, a Libras caracteriza-se por uma estrutura visual-espacial, na qual informações são transmitidas simultaneamente por meio de configurações de mão, movimentos e expressões corporais.
 
-\textbf{2.3.1 Redes Neurais Convolucionais (CNN)} \\
+Essa distinção impõe desafios específicos ao processo de tradução automática, exigindo o uso de técnicas capazes de lidar tanto com a análise espacial dos sinais quanto com sua evolução temporal e posterior reorganização linguística. Nesse contexto, são empregadas Redes Neurais Convolucionais para captura de padrões visuais, Redes LSTM para modelagem de sequências de movimento e técnicas de Processamento de Linguagem Natural para adaptação da estrutura gramatical ao português.
+
+
+\textbf{2.3.1 Linguagem da Língua Brasileira de Sinais (Libras)}
+
+A Língua Brasileira de Sinais (Libras) é uma língua natural, completa e autônoma, utilizada pela comunidade surda no Brasil, reconhecida pela Lei nº 10.436/2002 e regulamentada pelo Decreto nº 5.626/2005 como meio legal de comunicação e expressão. Possui estrutura gramatical própria, independente da Língua Portuguesa, e está inserida em um contexto cultural e linguístico específico da comunidade surda.
+
+Do ponto de vista linguístico, a Libras pertence à modalidade visual-espacial, em contraste com a modalidade oral-auditiva do português. Essa diferença implica mudanças importantes na forma como a informação é organizada: enquanto a língua portuguesa apresenta uma estrutura linear, em que os elementos aparecem em sequência, a Libras permite expressar diferentes informações ao mesmo tempo, por meio da combinação de sinais, movimentos e expressões faciais. Estudos mostram que as línguas de sinais possuem as mesmas propriedades das línguas naturais, como criatividade, organização por regras e capacidade de expressar qualquer tipo de conteúdo (QUADROS; KARNOPP, 2004; GESSER, 2009).
+
+No nível fonológico, os sinais são formados por parâmetros básicos, como configuração de mão (CM), movimento (M), locação (L), orientação (Or) e expressões não manuais (ENM). A combinação desses elementos forma os sinais, e mudanças em qualquer um desses parâmetros podem alterar o significado.
+
+Do ponto de vista morfológico, a Libras apresenta uma estrutura diferente da língua portuguesa. Em vez de adicionar partes de forma sequencial (como prefixos e sufixos), os elementos do sinal são combinados ao mesmo tempo. Por exemplo, informações como número, negação e até mesmo o objeto da ação podem ser incorporadas diretamente ao sinal. Além disso, a relação entre quem realiza e quem recebe a ação pode ser indicada pela direção do movimento no espaço, utilizando pontos de referência criados durante a comunicação (QUADROS; KARNOPP, 2004).
+
+No nível sintático, a língua portuguesa segue predominantemente a ordem Sujeito-Verbo-Objeto (SVO). Já a Libras apresenta maior flexibilidade, sendo possíveis diferentes organizações, como SVO, SOV, OSV e VOS, dependendo do contexto. Isso ocorre porque a língua utiliza o espaço para indicar relações entre os elementos da frase, reduzindo a necessidade de uma ordem fixa.
+
+Essas diferenças impactam diretamente o processo de tradução automática. Elementos comuns no português, como artigos e preposições, nem sempre aparecem de forma explícita na Libras, pois muitas dessas relações são expressas pelo uso do espaço e pelo contexto. Por isso, sistemas computacionais precisam não apenas reconhecer os sinais, mas também reorganizar as informações e incluir elementos necessários para gerar frases corretas em português.
+
+\textbf{2.3.2 Redes Neurais Convolucionais (CNN)} \\
 As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
 
 O diferencial da CNN reside nas camadas de convolução, que aplicam filtros matemáticos para extrair características hierárquicas da imagem, como bordas, texturas e formas. De acordo com \citeonline{Fleck2016}, o sucesso dessas redes em tarefas de visão computacional deve-se à sua capacidade de identificar características locais e ao compartilhamento de pesos entre as conexões. Essa configuração garante uma maior invariância a variações de translação e posição do objeto analisado, permitindo que o modelo identifique padrões visuais de forma robusta, mesmo diante de oscilações de iluminação ou enquadramento (\cite{Furtado2019}; \cite{Fleck2016}).
 
-\textbf{2.3.2 Redes de Memória de Longo Prazo (LSTM)} \\
+\textbf{2.3.3 Redes de Memória de Longo Prazo (LSTM)} \\
 Para o reconhecimento de sinais dinâmicos em vídeo, onde o significado do gesto reside no movimento ao longo do tempo, utiliza-se a Long Short-Term Memory (LSTM). Esta arquitetura é uma evolução das Redes Neurais Recorrentes (RNN) tradicionais, introduzida por \citeonline{Hochreiter1997} para solucionar a limitação do desaparecimento do gradiente (vanishing gradient), que impede redes comuns de aprenderem dependências de longo prazo em sequências de dados.
 
 O diferencial da LSTM é a sua unidade de memória interna, frequentemente chamada de célula, que permite a manutenção de informações por intervalos de tempo estendidos \cite{Hochreiter1997}. Essa estrutura é fundamental para o aprendizado de sequências complexas, como a linguagem de sinais, onde a predição ou classificação de um gesto depende de frames ocorridos em instantes anteriores \cite{Bayer2009}.
@@ -265,7 +282,7 @@ A arquitetura da LSTM é composta por três componentes principais, conhecidos c
 
 No contexto do tradutor de Libras, essa capacidade de retenção temporal permite que o sistema compreenda que a trajetória e a transição entre as poses das mãos são tão importantes quanto a configuração isolada em um único frame \cite{Almeida2019}. Como destacado por \citeonline{Schmidhuber2014}, a profundidade dessas redes em termos de passos temporais possibilita a extração de representações abstratas que conectam movimentos manuais a conceitos semânticos complexos, garantindo maior precisão na interpretação de sinais dinâmicos.
 
-\textbf{2.3.3 Processamento de Linguagem Natural (NLP)} \\
+\textbf{2.3.4 Processamento de Linguagem Natural (NLP)} \\
 O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto quanto de voz. Segundo a \citeonline{IBM2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
 
 No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão computacional não é suficiente para uma comunicação fluida, dada a profunda divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam \citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite que o sistema lide com a ambiguidade inerente à linguagem e aprenda representações hierárquicas dos dados textuais. O módulo de NLP atua, portanto, como uma camada de pós-processamento essencial, realizando a conversão semântica e sintática dos sinais identificados pela rede neural.
