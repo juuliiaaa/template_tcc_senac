@@ -292,6 +292,13 @@ Para viabilizar essas aplicações, utilizam-se técnicas de processamento de im
 
 Por fim, aplica-se a extração de características para identificar padrões relevantes, como o formato e a trajetória das mãos. De acordo com Souza, Magalhães e Pires (2021), essa técnica permite que o sistema identifique pontos específicos, chamados de landmarks, essenciais para a classificação precisa do sinal.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./figuras/visao-computacional.png}
+    \caption{Fluxo de Processamento da Arquitetura Híbrida.}
+    %\source{Autoria própria (2026).}
+\end{figure}
+
 \textbf{2.3.4 Redes Neurais Convolucionais (CNN)}
 
 As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
@@ -313,6 +320,13 @@ A arquitetura da LSTM é composta por três componentes principais, conhecidos c
 \end{enumerate}
 
 No contexto do tradutor de Libras, essa capacidade de retenção temporal permite que o sistema compreenda que a trajetória e a transição entre as poses das mãos são tão importantes quanto a configuração isolada em um único frame \cite{Almeida2019}. Como destacado por \citeonline{Schmidhuber2014}, a profundidade dessas redes em termos de passos temporais possibilita a extração de representações abstratas que conectam movimentos manuais a conceitos semânticos complexos, garantindo maior precisão na interpretação de sinais dinâmicos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figuras/lstm}
+    \caption{Diagrama de fluxo da solução proposta.}
+    %\source{Autoria própria (2026).}
+\end{figure}
 
 \textbf{2.3.6 Processamento de Linguagem Natural (NLP)}
 O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto quanto de voz. Segundo a \citeonline{IBM2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
@@ -368,8 +382,9 @@ Um dos principais desafios dessa integração está na necessidade de transforma
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{arquitetura-sistema}
+    \includegraphics[width=0.8\textwidth]{./figuras/arquitetura-sistema}
     \caption{Diagrama de fluxo da solução proposta.}
+    %\source{Autoria própria (2026).}
 \end{figure}
 
 \clearpage
