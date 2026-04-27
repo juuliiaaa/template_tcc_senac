@@ -456,26 +456,58 @@ Uma tabela comparativa ajuda a sintetizar as diferenças entre os trabalhos:
 \chapter{Desenvolvimento}
 \label{cap:desenvolvimento}
 
-Neste capítulo, apresenta-se a solução proposta para o problema identificado, bem como o cronograma de trabalho previsto para o desenvolvimento completo do projeto no TCC2.
-
+Neste capítulo, apresenta-se a solução proposta para o problema de tradução automática da Língua Brasileira de Sinais (Libras) para a língua portuguesa. A descrição contempla a visão geral do sistema, sua arquitetura, as tecnologias selecionadas, as funcionalidades principais, a metodologia de desenvolvimento adotada e os critérios de validação que serão utilizados para avaliar o desempenho da solução.
 % ---------------------------------------------------------------
 \section{Solução proposta}
 \label{sec:solucao}
 
-Descreva detalhadamente a solução que será desenvolvida para resolver o problema apresentado na introdução. A descrição deve incluir:
-
 \begin{itemize}
-    \item \textbf{Visão geral da solução}: o que será desenvolvido (sistema, aplicativo, modelo, ferramenta, etc.);
-    \item \textbf{Arquitetura}: como os componentes da solução se organizam e interagem;
-    \item \textbf{Tecnologias e ferramentas}: quais linguagens, frameworks, bibliotecas, bancos de dados e ambientes serão utilizados, e por que foram escolhidos;
-    \item \textbf{Funcionalidades principais}: o que a solução fará para atender aos objetivos;
-    \item \textbf{Metodologia de desenvolvimento}: qual abordagem será utilizada (ágil, cascata, prototipação, etc.);
-    \item \textbf{Critérios de validação}: como será medido o sucesso da solução (métricas, testes, avaliação com usuários, etc.).
+    \item \textbf{Visão geral da solução} \\
+    A solução proposta consiste em um sistema desktop de tradução automática em tempo execução, capaz de reconhecer gestos da Língua Brasileira de Sinais por meio de visão computacional e convertê-los em texto e fala em língua portuguesa. O sistema é voltado para uso em computadores com câmera integrada, sendo projetado para funcionar como um facilitador de comunicação em contextos como atendimentos, ambientes educacionais e interações cotidianas.
+    
+    A aplicação é composta por três módulos principais integrados em um pipeline de processamento sequencial: (i) o módulo de visão computacional, responsável pela captura e reconhecimento dos sinais; (ii) o módulo de processamento de linguagem natural, responsável pela conversão dos tokens reconhecidos em frases coerentes em português; e (iii) a interface do usuário, que exibe a tradução em tempo execução.
+    
+    Em razão da amplitude lexical da Libras e do caráter experimental deste estudo, o vocabulário inicial do sistema abrangerá um conjunto definido de sinais voltados a contextos de comunicação básica, como cumprimentos, solicitações de ajuda, identificação pessoal e situações de atendimento.
+
+    \item \textbf{Arquitetura}\\
+    A arquitetura do sistema é organizada de forma modular, dividida em três camadas principais de processamento que interagem sequencialmente para garantir a precisão da tradução:
+    \begin{enumerate}
+        \item Camada de Aquisição e Visão (Front-end/Captura): Responsável por receber o fluxo de vídeo e utilizar algoritmos de extração de landmarks para isolar os movimentos das mãos e do corpo.
+        \item Camada de Inteligência (Processamento Híbrido): O núcleo da solução, onde Redes Neurais Convolucionais (CNN) processam a geometria espacial de cada frame e Redes de Memória de Longo Prazo (LSTM) interpretam a continuidade temporal dos movimentos.
+        \item Camada de Interpretação Linguística (NLP): Módulo que recebe os sinais identificados (tokens) e aplica regras de Processamento de Linguagem Natural para gerar frases gramaticalmente corretas em língua portuguesa.
+    \end{enumerate}
+    \item \textbf{Tecnologias e ferramentas}\\
+    As escolhas tecnológicas foram feitas visando o alto desempenho em processamento de tensores e visão computacional:
+    \begin{itemize}
+        \item Linguagem de Programação: Python, devido à sua maturidade e vasta biblioteca para IA.
+        \item Frameworks de Inteligência Artificial: TensorFlow ou Keras para o desenvolvimento das arquiteturas CNN e LSTM.
+        \item Visão Computacional: MediaPipe ou OpenCV para a extração ágil de pontos de referência (landmarks) das mãos.
+        \item Dataset: [Inserir aqui o nome da base de dados, ex: LIBRAS-UFSC ou própria], escolhido pela diversidade de sinais e qualidade das anotações.
+        \item Processamento de Texto: Biblioteca NLTK ou spaCy para as tarefas de NLP e adequação gramatical.
+    \end{itemize}
+
+    \item \textbf{Funcionalidades principais}\\
+    Para atingir os objetivos propostos, o sistema disponibilizará as seguintes funcionalidades:
+    \begin{itemize}
+        \item Captura de Sinais em Tempo Real: Processamento de vídeo via webcam com baixa latência.
+        \item Reconhecimento de Sinais Estáticos e Dinâmicos: Capacidade de traduzir desde o alfabeto manual até gestos complexos em movimento.
+        \item Tradução Sintática Automática: Reorganização de sentenças da estrutura Libras para a estrutura SVO do português.
+        \item Saída Multimodal: Exibição da tradução em texto na tela.
+    \end{itemize}
+
+    \item \textbf{Metodologia de desenvolvimento}\\
+    O projeto adotará a metodologia ágil Scrum, organizada em ciclos de desenvolvimento (Sprints). A escolha justifica-se pela natureza experimental de modelos de IA, permitindo testes contínuos e ajustes refinados nos hiperparâmetros das redes neurais a cada entrega parcial (prototipação).
+
+    \item \textbf{Critérios de validação}\\
+    O sucesso da solução será medido através de métricas quantitativas e qualitativas:
+    \begin{itemize}
+        \item Acurácia e Precisão: Medição da taxa de acerto do modelo na classificação dos sinais utilizando uma matriz de confusão.
+        \item Métrica BLEU (Bilingual Evaluation Understudy): Utilizada para avaliar a qualidade da tradução gerada pelo módulo de NLP em comparação com traduções humanas.
+        \item Tempo de Resposta: Testes de latência para garantir que a tradução ocorra em tempo quase real.
+        \item Teste de Usabilidade: Avaliação da interface com potenciais usuários para verificar a clareza da tradução apresentada.
+    \end{itemize}
+
 \end{itemize}
-
-Utilize diagramas, fluxogramas ou mockups para ilustrar a solução. Exemplo de descrição de arquitetura:
-
-\textit{A solução proposta consiste em uma aplicação web composta por três camadas: front-end desenvolvido em React.js, back-end em Node.js com Express, e banco de dados PostgreSQL. A comunicação entre front-end e back-end será feita por meio de uma API REST.}
 
 % ---------------------------------------------------------------
 \section{Cronograma de trabalho}
