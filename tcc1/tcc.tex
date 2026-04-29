@@ -252,7 +252,7 @@ Essa distinção impõe desafios específicos ao processo de tradução automát
 
 A Língua Brasileira de Sinais (Libras) é uma língua natural, completa e autônoma, utilizada pela comunidade surda no Brasil, reconhecida pela Lei nº 10.436/2002 e regulamentada pelo Decreto nº 5.626/2005 como meio legal de comunicação e expressão. Possui estrutura gramatical própria, independente da Língua Portuguesa, e está inserida em um contexto cultural e linguístico específico da comunidade surda.
 
-Do ponto de vista linguístico, a Libras pertence à modalidade visual-espacial, em contraste com a modalidade oral-auditiva do português. Essa diferença implica mudanças importantes na forma como a informação é organizada: enquanto a língua portuguesa apresenta uma estrutura linear, em que os elementos aparecem em sequência, a Libras permite expressar diferentes informações ao mesmo tempo, por meio da combinação de sinais, movimentos e expressões faciais. Estudos mostram que as línguas de sinais possuem as mesmas propriedades das línguas naturais, como criatividade, organização por regras e capacidade de expressar qualquer tipo de conteúdo (\cite{Quadros2004}; GESSER, 2009).
+Do ponto de vista linguístico, a Libras pertence à modalidade visual-espacial, em contraste com a modalidade oral-auditiva do português. Essa diferença implica mudanças importantes na forma como a informação é organizada: enquanto a língua portuguesa apresenta uma estrutura linear, em que os elementos aparecem em sequência, a Libras permite expressar diferentes informações ao mesmo tempo, por meio da combinação de sinais, movimentos e expressões faciais. Estudos mostram que as línguas de sinais possuem as mesmas propriedades das línguas naturais, como criatividade, organização por regras e capacidade de expressar qualquer tipo de conteúdo \cite{Quadros2004}.
 
 No nível fonológico, os sinais são formados por parâmetros básicos, como configuração de mão (CM), movimento (M), locação (L), orientação (Or) e expressões não manuais (ENM). A combinação desses elementos forma os sinais, e mudanças em qualquer um desses parâmetros podem alterar o significado.
 
@@ -280,17 +280,17 @@ Além disso, a estruturação do dataset deve prever a divisão entre conjuntos 
 
 \textbf{2.3.3 Visão Computacional} \\
 
-A Visão Computacional (VC) é a ciência que permite que máquinas enxerguem e interpretem o meio à sua volta. Através da captura de imagens por câmeras e sensores, o sistema extrai informações significativas que permitem reconhecer e manipular objetos (MILANO; HONORATO).
+A Visão Computacional (VC) é a ciência que permite que máquinas enxerguem e interpretem o meio à sua volta. Através da captura de imagens por câmeras e sensores, o sistema extrai informações significativas que permitem reconhecer e manipular objetos \cite{Milano2014}.
 
-Essa tecnologia busca capacitar computadores a compreender o mundo visual de forma similar aos humanos. Segundo a ^^^~ IBM (2026)~~^~, enquanto a visão humana é intuitiva, as máquinas dependem de algoritmos para converter pixels e dados brutos em conceitos estruturados e compreensíveis.
+Essa tecnologia busca capacitar computadores a compreender o mundo visual de forma similar aos humanos. Segundo a \citeonline{IBM2025}, enquanto a visão humana é intuitiva, as máquinas dependem de algoritmos para converter pixels e dados brutos em conceitos estruturados e compreensíveis.
 
-No desenvolvimento deste projeto, a aplicação da visão computacional concentra-se prioritariamente na detecção de mãos. De acordo com Neves, Vieira Neto e Gonzaga (2012), essa etapa é crucial para localizar e isolar os membros superiores do restante do cenário, garantindo o foco nos sinais.
+No desenvolvimento deste projeto, a aplicação da visão computacional concentra-se prioritariamente na detecção de mãos. De acordo com \citeonline{Neves2012}, essa etapa é crucial para localizar e isolar os membros superiores do restante do cenário, garantindo o foco nos sinais.
 
-Outra aplicação fundamental é o reconhecimento de gestos, técnica que visa identificar movimentos e posições corporais a partir de dados visuais. Conforme explicam Pinho, Tavares e Correia (2004), essa análise é o que permite distinguir as diferentes configurações de mão que compõem o léxico da Libras.
+Outra aplicação fundamental é o reconhecimento de gestos, técnica que visa identificar movimentos e posições corporais a partir de dados visuais. Conforme explicam \citeonline{Pinho2004}, essa análise é o que permite distinguir as diferentes configurações de mão que compõem o léxico da Libras.
 
-Para viabilizar essas aplicações, utilizam-se técnicas de processamento de imagem, que preparam os dados brutos para análise. Segundo Milano e Honorato, procedimentos como filtragem e redução de ruído são fundamentais para que o sistema ignore informações irrelevantes do fundo da imagem.
+Para viabilizar essas aplicações, utilizam-se técnicas de processamento de imagem, que preparam os dados brutos para análise. Segundo \citeonline{Milano2014}, procedimentos como filtragem e redução de ruído são fundamentais para que o sistema ignore informações irrelevantes do fundo da imagem.
 
-Por fim, aplica-se a extração de características para identificar padrões relevantes, como o formato e a trajetória das mãos. De acordo com Souza, Magalhães e Pires (2021), essa técnica permite que o sistema identifique pontos específicos, chamados de landmarks, essenciais para a classificação precisa do sinal.
+Por fim, aplica-se a extração de características para identificar padrões relevantes, como o formato e a trajetória das mãos, permitndo que o sistema identifique pontos específicos, chamados de landmarks, essenciais para a classificação precisa do sinal.
 
 \begin{figure}[H]
     \centering
@@ -329,7 +329,7 @@ No contexto do tradutor de Libras, essa capacidade de retenção temporal permit
 \end{figure}
 
 \textbf{2.3.6 Processamento de Linguagem Natural (NLP)}
-O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto quanto de voz. Segundo a \citeonline{IBM2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
+O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto quanto de voz. Segundo \citeonline{IBM2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
 
 No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão computacional não é suficiente para uma comunicação fluida, dada a profunda divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam \citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite que o sistema lide com a ambiguidade inerente à linguagem e aprenda representações hierárquicas dos dados textuais. O módulo de NLP atua, portanto, como uma camada de pós-processamento essencial, realizando a conversão semântica e sintática dos sinais identificados pela rede neural.
 
