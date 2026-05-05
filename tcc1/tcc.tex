@@ -277,8 +277,17 @@ No contexto do reconhecimento de Libras, os datasets apresentam desafios únicos
 
 Além disso, a estruturação do dataset deve prever a divisão entre conjuntos de treinamento, validação e teste. Conforme explicam \citeonline{Goodfellow2016}, essa separação é o que permite avaliar a capacidade de generalização do algoritmo frente a dados nunca vistos, assegurando que o tradutor de Libras funcione corretamente em cenários do mundo real e não apenas em ambientes controlados de laboratório.
 
+\textbf{2.3.3 Pré-processamento de Dados} \\
 
-\textbf{2.3.3 Visão Computacional} \\
+Antes da aplicação dos modelos de aprendizado profundo, é necessária uma etapa de pré-processamento dos dados visuais, com o objetivo de melhorar a qualidade das informações fornecidas ao sistema e aumentar a precisão do reconhecimento dos sinais.
+
+O pré-processamento envolve técnicas de tratamento de imagem, como redimensionamento dos frames, normalização dos valores de pixel e remoção de ruídos. Além disso, podem ser aplicados filtros para suavização da imagem e ajuste de contraste, reduzindo interferências causadas por variações de iluminação e fundo. Segundo \citeonline{Szeliski2010}, essas etapas são fundamentais para garantir que os algoritmos de visão computacional consigam extrair características relevantes de forma eficiente.
+
+Outro aspecto relevante é a padronização dos dados de entrada, garantindo que todas as imagens ou sequências possuam dimensões e formatos consistentes. Essa uniformidade é essencial para o correto funcionamento das redes neurais, especialmente em modelos baseados em CNN e LSTM.
+
+No contexto deste trabalho, o pré-processamento também inclui a preparação das sequências de vídeo, organizando os frames de forma temporal para posterior análise pelo modelo LSTM.
+
+\textbf{2.3.4 Visão Computacional} \\
 
 A Visão Computacional (VC) é a ciência que permite que máquinas enxerguem e interpretem o meio à sua volta. Através da captura de imagens por câmeras e sensores, o sistema extrai informações significativas que permitem reconhecer e manipular objetos \cite{Milano2014}.
 
@@ -292,13 +301,24 @@ Para viabilizar essas aplicações, utilizam-se técnicas de processamento de im
 
 Por fim, aplica-se a extração de características para identificar padrões relevantes, como o formato e a trajetória das mãos, permitndo que o sistema identifique pontos específicos, chamados de landmarks, essenciais para a classificação precisa do sinal.
 
-\textbf{2.3.4 Redes Neurais Convolucionais (CNN)}
+
+\textbf{2.3.5 Landmarks (Pontos-chave)}
+
+Os landmarks, ou pontos-chave, são coordenadas específicas extraídas de partes relevantes do corpo, como mãos, dedos e articulações, utilizadas para representar a geometria e o movimento dos sinais.
+
+No reconhecimento de Libras, os landmarks desempenham um papel fundamental, pois permitem reduzir a complexidade dos dados visuais. Em vez de processar toda a imagem, o sistema passa a trabalhar com um conjunto estruturado de pontos que descrevem a posição e a movimentação das mãos ao longo do tempo.
+
+Ferramentas como o Google MediaPipe possibilitam a detecção desses pontos em tempo real, fornecendo informações como coordenadas tridimensionais (x, y, z) das articulações. De acordo com \citeonline{Lugaresi2019}, essa abordagem torna o processamento mais eficiente e robusto, além de reduzir a influência de fatores externos, como iluminação e fundo da imagem.
+
+Dessa forma, os landmarks atuam como uma representação compacta e informativa dos sinais, facilitando tanto o processamento pelas redes neurais quanto a generalização do modelo para diferentes usuários.
+
+\textbf{2.3.6 Redes Neurais Convolucionais (CNN)}
 
 As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
 
 O diferencial da CNN reside nas camadas de convolução, que aplicam filtros matemáticos para extrair características hierárquicas da imagem, como bordas, texturas e formas. De acordo com \citeonline{Fleck2016}, o sucesso dessas redes em tarefas de visão computacional deve-se à sua capacidade de identificar características locais e ao compartilhamento de pesos entre as conexões. Essa configuração garante uma maior invariância a variações de translação e posição do objeto analisado, permitindo que o modelo identifique padrões visuais de forma robusta, mesmo diante de oscilações de iluminação ou enquadramento (\cite{Furtado2019}; \cite{Fleck2016}).
 
-\textbf{2.3.5 Redes de Memória de Longo Prazo (LSTM)}
+\textbf{2.3.7 Redes de Memória de Longo Prazo (LSTM)}
 
 Para o reconhecimento de sinais dinâmicos em vídeo, onde o significado do gesto reside no movimento ao longo do tempo, utiliza-se a Long Short-Term Memory (LSTM). Esta arquitetura é uma evolução das Redes Neurais Recorrentes (RNN) tradicionais, introduzida por \citeonline{Hochreiter1997} para solucionar a limitação do desaparecimento do gradiente (vanishing gradient), que impede redes comuns de aprenderem dependências de longo prazo em sequências de dados.
 
@@ -355,7 +375,18 @@ A relação direta com as arquiteturas CNN e LSTM ocorre porque o aprendizado pr
 
 Dessa forma, a profundidade dessas redes permite que o sistema capture desde detalhes mínimos de um frame até o contexto completo de uma frase em Libras. Conforme destacam \citeonline{Fleck2016}, essa estrutura multicamada é essencial para que o modelo aprenda padrões que seriam invisíveis para algoritmos de aprendizado mais simples.
 
+\textbf{2.3.8 Custo Computacional e Peso dos Modelos}
+
+O custo computacional refere-se à quantidade de recursos necessários para executar um modelo, incluindo uso de memória, processamento e capacidade de armazenamento. Já o peso do modelo está relacionado ao número de parâmetros treináveis presentes na rede neural, influenciando diretamente seu tamanho e complexidade.
+
+Modelos mais complexos, como redes profundas com múltiplas camadas, tendem a apresentar maior precisão, porém demandam mais recursos computacionais. Conforme discutido por \citeonline{Goodfellow2016}, o aumento da profundidade das redes neurais eleva sua capacidade de representação, mas também implica maior custo de processamento e necessidade de hardware mais robusto.
+
+No contexto deste trabalho, a escolha das arquiteturas busca equilibrar desempenho e eficiência, considerando a necessidade de processamento em tempo quase real. Estratégias como o uso de landmarks, redução de dimensionalidade dos dados e limitação do vocabulário inicial contribuem para diminuir o custo computacional.
+
+Esse equilíbrio é fundamental para garantir que o sistema seja não apenas preciso, mas também utilizável em cenários práticos.
+
 \textbf{2.3.8 Reconhecimento de Gestos (Gesture Recognition)}
+
 O reconhecimento de gestos é uma parte da visão computacional que visa identificar e interpretar movimentos ou posições do corpo humano a partir de dados visuais, transformando-os em comandos ou símbolos compreensíveis por máquinas \cite{Silva2017}. No contexto da Língua Brasileira de Sinais (Libras), essa técnica é o pilar fundamental para a tradução automatizada, permitindo que a interação entre surdos e ouvintes ocorra de forma fluida através da interface homem-máquina \cite{Bittencourt2002}.
 
 Os gestos são geralmente classificados em duas categorias principais, cada uma exigindo abordagens algorítmicas distintas:
@@ -369,6 +400,18 @@ A implementação eficaz desses sistemas enfrenta desafios significativos que po
 Além disso, a variabilidade entre usuários introduz complexidade, uma vez que diferentes pessoas possuem características físicas distintas e executam o mesmo sinal com velocidades e amplitudes diversas, exigindo modelos robustos e generalistas \cite{Silva2017}. 
 
 Por fim, a influência do fundo da imagem (background) pode impactar a precisão, especialmente em cenários com muitos objetos ou cores semelhantes ao tom da pele humana, o que torna essencial o uso de filtros adaptativos ou técnicas de segmentação para isolar adequadamente a mão do restante da cena \cite{Monteiro2016}.
+
+\textbf{2.3.8 Latência e Tempo de Resposta}
+
+A latência corresponde ao tempo decorrido entre a captura do sinal pelo sistema e a exibição da tradução ao usuário. Em aplicações de tradução em tempo real, esse fator é crítico, pois impacta diretamente a experiência de uso e a fluidez da comunicação.
+
+Sistemas com alta latência podem gerar atrasos perceptíveis, comprometendo a interação entre os usuários. Por isso, é necessário otimizar todas as etapas do pipeline, desde a captura do vídeo até o processamento pelos modelos e a geração da saída textual.
+
+De acordo com \citeonline{Molchanov2015}, em sistemas de reconhecimento de gestos em tempo real, o desempenho está diretamente relacionado à eficiência computacional dos modelos e à capacidade de processar sequências de vídeo com baixa latência.
+
+No presente trabalho, a latência será considerada como um dos principais critérios de avaliação do sistema. A utilização de técnicas como processamento eficiente de frames, redução do tamanho dos dados (por meio de landmarks) e escolha de modelos com menor custo computacional contribui para minimizar o tempo de resposta.
+
+Dessa forma, busca-se garantir que a tradução ocorra de forma rápida e contínua, aproximando-se de uma comunicação natural.
 
 \textbf{2.3.9 Integração Visão Computacional + NLP}
 
