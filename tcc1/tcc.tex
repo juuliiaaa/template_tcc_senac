@@ -161,7 +161,7 @@ A comunicação é extremamente importante para promover a inclusão social. No 
 
 O desafio da comunicação reside no fato de que a Libras e a Língua Portuguesa possuem modalidades distintas, sendo esta oral-auditiva e linear, e aquela visual-espacial e simultânea, o que resulta em gramáticas e estruturas sintáticas completamente divergentes (\cite{Olizaroski2024}).
 
-Com a evolução das tecnologias em inteligência artificial, principalmente em visão computacional e processamento de linguagem natural, surgem novas maneiras de diminuir essas barreiras. Sistemas que conseguem reconhecer gestos e convertê-los automaticamente em texto ou fala podem ser uma solução bastante promissora para facilitar a interação entre surdos e ouvintes. 
+Com a evolução das tecnologias em inteligência artificial, principalmente em visão computacional e processamento de linguagem natural, surgem novas maneiras de diminuir essas barreiras. Sistemas que conseguem reconhecer gestos e convertê-los automaticamente em texto podem ser uma solução bastante promissora para facilitar a interação entre surdos e ouvintes. 
 
 Nesse cenário, o Processamento de Linguagem Natural (PLN) desempenha um papel fundamental ao atuar como uma camada de conversão inteligente. Sua função é interpretar os sinais isolados identificados pela visão computacional e reorganizá-los semântica e sintaticamente, realizando os ajustes de concordância e ordem frasal necessários para transformar a estrutura própria da Libras em frases coerentes e gramaticalmente corretas na língua portuguesa.
 
@@ -199,7 +199,7 @@ Os objetivos deste trabalho estão voltados para o desenvolvimento de uma soluç
 
 \subsection{Objetivo principal}
 
-Implementar um sistema computacional capaz de reconhecer gestos da Língua Brasileira de Sinais (Libras) por meio de visão computacional e traduzi-los em texto ou fala, utilizando técnicas de processamento de linguagem natural.
+Implementar um sistema computacional capaz de reconhecer gestos da Língua Brasileira de Sinais (Libras) por meio de visão computacional e traduzi-los em texto, utilizando técnicas de processamento de linguagem natural.
 
 \subsection{Objetivos secundários}
 
@@ -235,7 +235,7 @@ Apesar dos avanços, ainda existem desafios relacionados à disponibilidade de d
 \section{Metodologia da pesquisa bibliográfica}
 \label{sec:metodologia_pesquisa}
 
-A pesquisa bibliográfica foi realizada nas bases Google Scholar e IEEE Xplore, utilizando as strings de busca "Libras" AND "Deep Learning" AND "Visão Computacional", "Reconhecimento de sinais" AND "Libras" AND ("CNN" OR "LSTM") e "Língua Brasileira de Sinais" AND "Acessibilidade" AND "Redes Neurais". Foram selecionados artigos publicados entre 2021 e 2026, em português e inglês, que abordassem diretamente técnicas de classificação automática de documentos.
+A pesquisa bibliográfica foi realizada nas bases Google Scholar e IEEE Xplore, utilizando as strings de busca "Libras" AND "Deep Learning" AND "Visão Computacional", "Reconhecimento de sinais" AND "Libras" AND ("CNN" OR "LSTM") e "Língua Brasileira de Sinais" AND "Acessibilidade" AND "Redes Neurais". Foram selecionados artigos publicados entre 2021 e 2026, em português e inglês, que abordassem diretamente o reconhecimento automático de sinais, técnicas de visão computacional aplicadas à Libras e métodos de processamento de linguagem natural voltados à tradução de linguagem de sinais.
 
 % \textit{} italico
 
@@ -292,13 +292,6 @@ Para viabilizar essas aplicações, utilizam-se técnicas de processamento de im
 
 Por fim, aplica-se a extração de características para identificar padrões relevantes, como o formato e a trajetória das mãos, permitndo que o sistema identifique pontos específicos, chamados de landmarks, essenciais para a classificação precisa do sinal.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{./figuras/visao-computacional.png}
-    \caption{Fluxo de Processamento da Arquitetura Híbrida.}
-    \source{Autoria própria (2026).}
-\end{figure}
-
 \textbf{2.3.4 Redes Neurais Convolucionais (CNN)}
 
 As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
@@ -339,7 +332,7 @@ Para isso, aplicam-se técnicas de processamento que ajustam a sintaxe e a gram�
 
 Paralelamente, o módulo assegura a integridade semântica da tradução, garantindo que o sentido original da mensagem seja preservado durante a conversão entre as modalidades. 
 
-Por fim, o tratamento de variações linguísticas resolve questões essenciais de concordância nominal e verbal, além de refinar a estrutura frasal, resultando em uma saída de texto ou fala que seja natural e compreensível para o usuário ouvinte \cite{Lopez2017}.
+Por fim, o tratamento de variações linguísticas resolve questões essenciais de concordância nominal e verbal, além de refinar a estrutura frasal, resultando em uma saída de texto que seja natural e compreensível para o usuário ouvinte \cite{Lopez2017}.
 
 \begin{figure}[H]
     \centering
@@ -385,12 +378,6 @@ O processo ocorre em etapas, iniciando pela captura de vídeo, seguida pelo reco
 
 Um dos principais desafios dessa integração está na necessidade de transformar sinais isolados em frases coerentes, respeitando as regras gramaticais da língua portuguesa. Dessa forma, o sistema não se limita ao reconhecimento de gestos, mas busca realizar uma tradução mais completa e significativa.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./figuras/arquitetura-sistema}
-    \caption{Diagrama de fluxo da solução proposta.}
-    \source{Autoria própria (2026).}
-\end{figure}
 
 % ---------------------------------------------------------------
 \section{Trabalhos relacionados}
@@ -479,6 +466,14 @@ Este trabalho se diferencia ao propor uma solução que vai além do reconhecime
 \label{cap:desenvolvimento}
 
 Neste capítulo, apresenta-se a solução proposta para o problema de tradução automática da Língua Brasileira de Sinais (Libras) para a língua portuguesa. A descrição contempla a visão geral do sistema, sua arquitetura, as tecnologias selecionadas, as funcionalidades principais, a metodologia de desenvolvimento adotada e os critérios de validação que serão utilizados para avaliar o desempenho da solução.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figuras/arquitetura-sistema}
+    \caption{Diagrama de fluxo da solução proposta.}
+    \source{Autoria própria (2026).}
+\end{figure}
+
 % ---------------------------------------------------------------
 \section{Solução proposta}
 \label{sec:solucao}
@@ -486,7 +481,7 @@ Neste capítulo, apresenta-se a solução proposta para o problema de tradução
 \begin{itemize}
 
     \item \textbf{Visão geral da solução} \\
-    A solução proposta consiste em um sistema desktop de tradução automática em tempo execução, capaz de reconhecer gestos da Língua Brasileira de Sinais por meio de visão computacional e convertê-los em texto e fala em língua portuguesa. O sistema é voltado para uso em computadores com câmera integrada, sendo projetado para funcionar como um facilitador de comunicação em contextos como atendimentos, ambientes educacionais e interações cotidianas.
+    A solução proposta consiste em um sistema desktop de tradução automática em tempo execução, capaz de reconhecer gestos da Língua Brasileira de Sinais por meio de visão computacional e convertê-los em texto da língua portuguesa. O sistema é voltado para uso em computadores com câmera integrada, sendo projetado para funcionar como um facilitador de comunicação em contextos como atendimentos, ambientes educacionais e interações cotidianas.
     
     A aplicação é composta por três módulos principais integrados em um pipeline de processamento sequencial: (i) o módulo de visão computacional, responsável pela captura e reconhecimento dos sinais; (ii) o módulo de processamento de linguagem natural, responsável pela conversão dos tokens reconhecidos em frases coerentes em português; e (iii) a interface do usuário, que exibe a tradução em tempo execução.
     
@@ -506,6 +501,14 @@ Neste capítulo, apresenta-se a solução proposta para o problema de tradução
         \item Camada de Inteligência (Processamento Híbrido): O núcleo da solução, onde Redes Neurais Convolucionais (CNN) processam a geometria espacial de cada frame e Redes de Memória de Longo Prazo (LSTM) interpretam a continuidade temporal dos movimentos.
         \item Camada de Interpretação Linguística (NLP): Módulo que recebe os sinais identificados (tokens) e aplica regras de Processamento de Linguagem Natural para gerar frases gramaticalmente corretas em língua portuguesa.
     \end{enumerate}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.0\textwidth]{./figuras/visao-computacional.png}
+        \caption{Fluxo de Processamento da Arquitetura Híbrida.}
+        \source{Autoria própria (2026).}
+    \end{figure}
+
     \item \textbf{Tecnologias e ferramentas}\\
     As escolhas tecnológicas foram feitas visando o alto desempenho em processamento de tensores e visão computacional:
     \begin{itemize}
@@ -521,6 +524,14 @@ Neste capítulo, apresenta-se a solução proposta para o problema de tradução
     \begin{itemize}
         \item Captura de Sinais em Tempo Real: Processamento de vídeo via webcam com baixa latência.
         \item Reconhecimento de Sinais Estáticos e Dinâmicos: Capacidade de traduzir desde o alfabeto manual até gestos complexos em movimento.
+        \begin{figure}[H]
+            \centering
+            \caption{Alfabeto de Libras.} 
+            \label{fig: https://segredosdomundo.r7.com/linguagem-de-sinais-aprenda-algumas-palavras-e-frases-em-libras/}
+            \includegraphics[width=0.8\textwidth]{./figuras/alfabetoLibras.jpg}
+            \vspace{0.3cm}
+            \centerline{\small Fonte: Segredos do Mundo (2026).}
+        \end{figure}
         \item Tradução Sintática Automática: Reorganização de sentenças da estrutura Libras para a estrutura SVO do português.
         \item Saída Multimodal: Exibição da tradução em texto na tela.
     \end{itemize}
