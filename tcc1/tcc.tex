@@ -312,13 +312,27 @@ Ferramentas como o Google MediaPipe possibilitam a detecção desses pontos em t
 
 Dessa forma, os landmarks atuam como uma representação compacta e informativa dos sinais, facilitando tanto o processamento pelas redes neurais quanto a generalização do modelo para diferentes usuários.
 
-\textbf{2.3.6 Redes Neurais Convolucionais (CNN)}
+\textbf{2.3.6 Deep Learning}
+
+O Deep Learning, ou Aprendizado Profundo, é uma subárea do aprendizado de máquina que utiliza redes neurais artificiais com múltiplas camadas de processamento. Segundo a \citeonline{IBM2026}, essa abordagem é inspirada na estrutura do cérebro humano, onde cada camada de "neurônios" executa operações matemáticas para aprender representações cada vez mais abstratas dos dados.
+
+Diferente dos métodos tradicionais, o aprendizado profundo permite que o sistema identifique características automaticamente, sem a necessidade de intervenção humana manual. Conforme explica a \citeonline{Oracle2022}, essa capacidade de autoajuste através de pesos e vieses é o que torna os modelos extremamente precisos para resolver problemas complexos.
+
+Um dos principais motivos para a ampla adoção desta tecnologia é o seu desempenho superior em tarefas que envolvem visão computacional e processamento de texto. De acordo com \citeonline{Schmidhuber2014}, o aprendizado profundo revolucionou o reconhecimento de padrões ao permitir a análise de grandes volumes de dados não estruturados.
+
+No contexto deste projeto, o uso do Deep Learning justifica-se pela necessidade de tratar informações visuais e sequenciais simultaneamente. Segundo \citeonline{Goodfellow2016}, redes profundas são aproximadores universais capazes de mapear entradas complexas para saídas específicas, como a tradução de um gesto em texto.
+
+A relação direta com as arquiteturas CNN e LSTM ocorre porque o aprendizado profundo fornece a base para camadas especializadas. Enquanto as Redes Neurais Convolucionais (CNN) focam na hierarquia espacial das imagens, as redes de memória de longo prazo (LSTM) lidam com a dependência temporal \cite{Hochreiter1997}.
+
+Dessa forma, a profundidade dessas redes permite que o sistema capture desde detalhes mínimos de um frame até o contexto completo de uma frase em Libras. Conforme destacam \citeonline{Fleck2016}, essa estrutura multicamada é essencial para que o modelo aprenda padrões que seriam invisíveis para algoritmos de aprendizado mais simples.
+
+\textbf{2.3.7 Redes Neurais Convolucionais (CNN)}
 
 As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
 
 O diferencial da CNN reside nas camadas de convolução, que aplicam filtros matemáticos para extrair características hierárquicas da imagem, como bordas, texturas e formas. De acordo com \citeonline{Fleck2016}, o sucesso dessas redes em tarefas de visão computacional deve-se à sua capacidade de identificar características locais e ao compartilhamento de pesos entre as conexões. Essa configuração garante uma maior invariância a variações de translação e posição do objeto analisado, permitindo que o modelo identifique padrões visuais de forma robusta, mesmo diante de oscilações de iluminação ou enquadramento (\cite{Furtado2019}; \cite{Fleck2016}).
 
-\textbf{2.3.7 Redes de Memória de Longo Prazo (LSTM)}
+\textbf{2.3.8 Redes de Memória de Longo Prazo (LSTM)}
 
 Para o reconhecimento de sinais dinâmicos em vídeo, onde o significado do gesto reside no movimento ao longo do tempo, utiliza-se a Long Short-Term Memory (LSTM). Esta arquitetura é uma evolução das Redes Neurais Recorrentes (RNN) tradicionais, introduzida por \citeonline{Hochreiter1997} para solucionar a limitação do desaparecimento do gradiente (vanishing gradient), que impede redes comuns de aprenderem dependências de longo prazo em sequências de dados.
 
@@ -341,7 +355,33 @@ No contexto do tradutor de Libras, essa capacidade de retenção temporal permit
     \source{Autoria própria (2026).}
 \end{figure}
 
-\textbf{2.3.6 Processamento de Linguagem Natural (NLP)}
+\textbf{2.3.9 Custo Computacional e Peso dos Modelos}
+
+O custo computacional refere-se à quantidade de recursos necessários para executar um modelo, incluindo uso de memória, processamento e capacidade de armazenamento. Já o peso do modelo está relacionado ao número de parâmetros treináveis presentes na rede neural, influenciando diretamente seu tamanho e complexidade.
+
+Modelos mais complexos, como redes profundas com múltiplas camadas, tendem a apresentar maior precisão, porém demandam mais recursos computacionais. Conforme discutido por \citeonline{Goodfellow2016}, o aumento da profundidade das redes neurais eleva sua capacidade de representação, mas também implica maior custo de processamento e necessidade de hardware mais robusto.
+
+No contexto deste trabalho, a escolha das arquiteturas busca equilibrar desempenho e eficiência, considerando a necessidade de processamento em tempo quase real. Estratégias como o uso de landmarks, redução de dimensionalidade dos dados e limitação do vocabulário inicial contribuem para diminuir o custo computacional.
+
+Esse equilíbrio é fundamental para garantir que o sistema seja não apenas preciso, mas também utilizável em cenários práticos.
+
+\textbf{2.3.10 Reconhecimento de Gestos (Gesture Recognition)}
+
+O reconhecimento de gestos é uma parte da visão computacional que visa identificar e interpretar movimentos ou posições do corpo humano a partir de dados visuais, transformando-os em comandos ou símbolos compreensíveis por máquinas \cite{Silva2017}. No contexto da Língua Brasileira de Sinais (Libras), essa técnica é o pilar fundamental para a tradução automatizada, permitindo que a interação entre surdos e ouvintes ocorra de forma fluida através da interface homem-máquina \cite{Bittencourt2002}.
+
+Os gestos são geralmente classificados em duas categorias principais, cada uma exigindo abordagens algorítmicas distintas:
+\begin{itemize}
+    \item Estáticos (Imagem): Referem-se à configuração ou postura da mão em um único instante. O foco recai sobre a forma, a orientação e a posição dos dedos, como ocorre na representação do alfabeto manual ou numerais em Libras \cite{PintoJunior2019}. Redes Neurais Convolucionais (CNNs) são frequentemente aplicadas para extrair padrões espaciais nessas imagens estáticas.
+    \item Dinâmicos (Vídeo): Envolvem uma sequência de movimentos ao longo do tempo, onde a trajetória e a velocidade são cruciais para o significado do sinal \cite{Silva2017}. Para interpretá-los, utilizam-se técnicas que consideram a continuidade temporal, como a subtração de quadros sucessivos para detecção de movimento ou o uso de grafos de ação e aprendizado de métricas para reconhecimento em tempo de execução \cite{Monteiro2016}.
+\end{itemize}
+
+A implementação eficaz desses sistemas enfrenta desafios significativos que podem comprometer a taxa de acerto do reconhecimento. As variações de iluminação representam um dos principais obstáculos, pois alterações na luz do ambiente modificam os valores dos pixels e dificultam a segmentação precisa da pele \cite{Bittencourt2002}. 
+
+Além disso, a variabilidade entre usuários introduz complexidade, uma vez que diferentes pessoas possuem características físicas distintas e executam o mesmo sinal com velocidades e amplitudes diversas, exigindo modelos robustos e generalistas \cite{Silva2017}. 
+
+Por fim, a influência do fundo da imagem (background) pode impactar a precisão, especialmente em cenários com muitos objetos ou cores semelhantes ao tom da pele humana, o que torna essencial o uso de filtros adaptativos ou técnicas de segmentação para isolar adequadamente a mão do restante da cena \cite{Monteiro2016}.
+
+\textbf{2.3.11 Processamento de Linguagem Natural (NLP)}
 O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto quanto de voz. Segundo \citeonline{IBM2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
 
 No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão computacional não é suficiente para uma comunicação fluida, dada a profunda divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam \citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite que o sistema lide com a ambiguidade inerente à linguagem e aprenda representações hierárquicas dos dados textuais. O módulo de NLP atua, portanto, como uma camada de pós-processamento essencial, realizando a conversão semântica e sintática dos sinais identificados pela rede neural.
@@ -361,47 +401,8 @@ Por fim, o tratamento de variações linguísticas resolve questões essenciais 
     \source{Autoria própria (2026).}
 \end{figure}
 
-\textbf{2.3.7 Deep Learning}
 
-O Deep Learning, ou Aprendizado Profundo, é uma subárea do aprendizado de máquina que utiliza redes neurais artificiais com múltiplas camadas de processamento. Segundo a \citeonline{IBM2026}, essa abordagem é inspirada na estrutura do cérebro humano, onde cada camada de "neurônios" executa operações matemáticas para aprender representações cada vez mais abstratas dos dados.
-
-Diferente dos métodos tradicionais, o aprendizado profundo permite que o sistema identifique características automaticamente, sem a necessidade de intervenção humana manual. Conforme explica a \citeonline{Oracle2022}, essa capacidade de autoajuste através de pesos e vieses é o que torna os modelos extremamente precisos para resolver problemas complexos.
-
-Um dos principais motivos para a ampla adoção desta tecnologia é o seu desempenho superior em tarefas que envolvem visão computacional e processamento de texto. De acordo com \citeonline{Schmidhuber2014}, o aprendizado profundo revolucionou o reconhecimento de padrões ao permitir a análise de grandes volumes de dados não estruturados.
-
-No contexto deste projeto, o uso do Deep Learning justifica-se pela necessidade de tratar informações visuais e sequenciais simultaneamente. Segundo \citeonline{Goodfellow2016}, redes profundas são aproximadores universais capazes de mapear entradas complexas para saídas específicas, como a tradução de um gesto em texto.
-
-A relação direta com as arquiteturas CNN e LSTM ocorre porque o aprendizado profundo fornece a base para camadas especializadas. Enquanto as Redes Neurais Convolucionais (CNN) focam na hierarquia espacial das imagens, as redes de memória de longo prazo (LSTM) lidam com a dependência temporal \cite{Hochreiter1997}.
-
-Dessa forma, a profundidade dessas redes permite que o sistema capture desde detalhes mínimos de um frame até o contexto completo de uma frase em Libras. Conforme destacam \citeonline{Fleck2016}, essa estrutura multicamada é essencial para que o modelo aprenda padrões que seriam invisíveis para algoritmos de aprendizado mais simples.
-
-\textbf{2.3.8 Custo Computacional e Peso dos Modelos}
-
-O custo computacional refere-se à quantidade de recursos necessários para executar um modelo, incluindo uso de memória, processamento e capacidade de armazenamento. Já o peso do modelo está relacionado ao número de parâmetros treináveis presentes na rede neural, influenciando diretamente seu tamanho e complexidade.
-
-Modelos mais complexos, como redes profundas com múltiplas camadas, tendem a apresentar maior precisão, porém demandam mais recursos computacionais. Conforme discutido por \citeonline{Goodfellow2016}, o aumento da profundidade das redes neurais eleva sua capacidade de representação, mas também implica maior custo de processamento e necessidade de hardware mais robusto.
-
-No contexto deste trabalho, a escolha das arquiteturas busca equilibrar desempenho e eficiência, considerando a necessidade de processamento em tempo quase real. Estratégias como o uso de landmarks, redução de dimensionalidade dos dados e limitação do vocabulário inicial contribuem para diminuir o custo computacional.
-
-Esse equilíbrio é fundamental para garantir que o sistema seja não apenas preciso, mas também utilizável em cenários práticos.
-
-\textbf{2.3.8 Reconhecimento de Gestos (Gesture Recognition)}
-
-O reconhecimento de gestos é uma parte da visão computacional que visa identificar e interpretar movimentos ou posições do corpo humano a partir de dados visuais, transformando-os em comandos ou símbolos compreensíveis por máquinas \cite{Silva2017}. No contexto da Língua Brasileira de Sinais (Libras), essa técnica é o pilar fundamental para a tradução automatizada, permitindo que a interação entre surdos e ouvintes ocorra de forma fluida através da interface homem-máquina \cite{Bittencourt2002}.
-
-Os gestos são geralmente classificados em duas categorias principais, cada uma exigindo abordagens algorítmicas distintas:
-\begin{itemize}
-    \item Estáticos (Imagem): Referem-se à configuração ou postura da mão em um único instante. O foco recai sobre a forma, a orientação e a posição dos dedos, como ocorre na representação do alfabeto manual ou numerais em Libras \cite{PintoJunior2019}. Redes Neurais Convolucionais (CNNs) são frequentemente aplicadas para extrair padrões espaciais nessas imagens estáticas.
-    \item Dinâmicos (Vídeo): Envolvem uma sequência de movimentos ao longo do tempo, onde a trajetória e a velocidade são cruciais para o significado do sinal \cite{Silva2017}. Para interpretá-los, utilizam-se técnicas que consideram a continuidade temporal, como a subtração de quadros sucessivos para detecção de movimento ou o uso de grafos de ação e aprendizado de métricas para reconhecimento em tempo de execução \cite{Monteiro2016}.
-\end{itemize}
-
-A implementação eficaz desses sistemas enfrenta desafios significativos que podem comprometer a taxa de acerto do reconhecimento. As variações de iluminação representam um dos principais obstáculos, pois alterações na luz do ambiente modificam os valores dos pixels e dificultam a segmentação precisa da pele \cite{Bittencourt2002}. 
-
-Além disso, a variabilidade entre usuários introduz complexidade, uma vez que diferentes pessoas possuem características físicas distintas e executam o mesmo sinal com velocidades e amplitudes diversas, exigindo modelos robustos e generalistas \cite{Silva2017}. 
-
-Por fim, a influência do fundo da imagem (background) pode impactar a precisão, especialmente em cenários com muitos objetos ou cores semelhantes ao tom da pele humana, o que torna essencial o uso de filtros adaptativos ou técnicas de segmentação para isolar adequadamente a mão do restante da cena \cite{Monteiro2016}.
-
-\textbf{2.3.8 Latência e Tempo de Resposta}
+\textbf{2.3.12 Latência e Tempo de Resposta}
 
 A latência corresponde ao tempo decorrido entre a captura do sinal pelo sistema e a exibição da tradução ao usuário. Em aplicações de tradução em tempo real, esse fator é crítico, pois impacta diretamente a experiência de uso e a fluidez da comunicação.
 
@@ -413,7 +414,7 @@ No presente trabalho, a latência será considerada como um dos principais crit�
 
 Dessa forma, busca-se garantir que a tradução ocorra de forma rápida e contínua, aproximando-se de uma comunicação natural.
 
-\textbf{2.3.9 Integração Visão Computacional + NLP}
+\textbf{2.3.13 Integração Visão Computacional + NLP}
 
 A integração entre visão computacional e processamento de linguagem natural é essencial para o funcionamento do sistema proposto. Essa combinação permite não apenas reconhecer os sinais, mas também convertê-los em linguagem compreensível.
 
