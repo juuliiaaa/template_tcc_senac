@@ -326,13 +326,39 @@ A relação direta com as arquiteturas CNN e LSTM ocorre porque o aprendizado pr
 
 Dessa forma, a profundidade dessas redes permite que o sistema capture desde detalhes mínimos de um frame até o contexto completo de uma frase em Libras. Conforme destacam \citeonline{Fleck2016}, essa estrutura multicamada é essencial para que o modelo aprenda padrões que seriam invisíveis para algoritmos de aprendizado mais simples.
 
-\textbf{2.3.7 Redes Neurais Convolucionais (CNN)}
+\subsubsection*{\textbf{2.3.7 Redes Neurais Convolucionais (CNN)}}
 
-As Redes Neurais Convolucionais são arquiteturas especializadas no processamento de dados com topologia em grelha, como imagens. No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos (alfabeto manual), onde a identificação do sinal depende exclusivamente da configuração espacial da mão em um único frame.
+As Redes Neurais Convolucionais (CNN) são arquiteturas de aprendizado profundo especializadas no processamento de dados com topologia em grade, como imagens e sequências. Introduzidas por \citeonline{Lecun1998} e popularizadas com o modelo AlexNet \cite{Krizhevsky2012}, as CNNs revolucionaram o campo da visão computacional ao substituir a extração manual de características por um processo de aprendizado automático e hierárquico.
+ 
+No escopo deste trabalho, a CNN é utilizada para o reconhecimento de sinais estáticos, como as configurações de mão do alfabeto manual da Libras, nos quais a identificação do sinal depende exclusivamente da configuração espacial da mão em um único \textit{frame} \cite{Fleck2016}.
+  
+A arquitetura de uma CNN é composta por três tipos principais de camadas que se alternam e se combinam ao longo da rede \cite{Goodfellow2016}:
+ 
+\begin{enumerate}
+ 
+  \item Camada de Convolução: É o bloco fundamental da CNN. Nela, um conjunto de filtros (também chamados de \textit{kernels}) de tamanho reduzido, tipicamente $3 \times 3$ ou $5 \times 5$ pixels, desliza sobre a imagem de entrada, calculando o produto escalar entre os pesos do filtro e os pixels da região coberta. Matematicamente, para uma imagem de entrada $I$ e um filtro $K$, a operação de convolução discreta é definida como:
+ 
+  \begin{equation}
+      (I * K)(i, j) = \sum_{m}\sum_{n} I(i+m,\; j+n) \cdot K(m, n)
+  \end{equation}
+  $I$: Imagem de entrada. \\
+  $K$: Filtro ou \textit{kernel}. \\
+  $(i, j)$: Posição atual do pixel na saída (mapa de características). \\
+  $(m, n)$: Índices do \textit{kernel}. \\
+ 
+  O resultado é chamado de mapa de ativação, que representa a presença de um determinado padrão visual (como bordas, curvas ou texturas) em cada posição espacial da imagem \cite{Goodfellow2016}. O compartilhamento de pesos entre todas as posições da imagem reduz drasticamente o número de parâmetros treináveis e confere à CNN invariância à translação, o modelo reconhece o padrão independentemente de onde ele aparece na imagem \cite{Fleck2016}.
+ 
+  \item Camada de Pooling: Após a convolução, a camada de \textit{pooling} realiza uma subamostragem espacial dos mapas de ativação, reduzindo suas dimensões e, com isso, a quantidade de parâmetros e o custo computacional das camadas subsequentes. A operação mais comum é o Max Pooling, que seleciona o valor máximo dentro de uma janela de tamanho fixo (por exemplo, $2 \times 2$), retendo as características mais proeminentes e descartando informações redundantes \cite{Lecun1998}. Esse mecanismo também contribui para a robustez do modelo a pequenas variações de posição e escala dos objetos.
+ 
+  \item Camadas Totalmente Conectadas: Ao final da rede, após um conjunto de camadas de convolução e \textit{pooling}, os mapas de ativação são linearizados e alimentados em uma ou mais camadas totalmente conectadas, que funcionam como um classificador tradicional. Nessa etapa, as representações abstratas aprendidas pelas camadas anteriores são combinadas para gerar a predição final, por exemplo, a probabilidade de que o gesto capturado corresponda a cada letra do alfabeto manual \cite{Furtado2019}.
+ 
+\end{enumerate}
+  
+No contexto deste projeto, os \textit{landmarks} extraídos pelo MediaPipe (coordenadas $x$, $y$, $z$ das articulações da mão) são organizados como vetores de entrada para a CNN. A rede aprende, durante o treinamento, quais combinações de posições articulares são discriminativas para cada sinal estático. 
 
-O diferencial da CNN reside nas camadas de convolução, que aplicam filtros matemáticos para extrair características hierárquicas da imagem, como bordas, texturas e formas. De acordo com \citeonline{Fleck2016}, o sucesso dessas redes em tarefas de visão computacional deve-se à sua capacidade de identificar características locais e ao compartilhamento de pesos entre as conexões. Essa configuração garante uma maior invariância a variações de translação e posição do objeto analisado, permitindo que o modelo identifique padrões visuais de forma robusta, mesmo diante de oscilações de iluminação ou enquadramento (\cite{Furtado2019}; \cite{Fleck2016}).
+Conforme apontam \citeonline{Fleck2016}, o sucesso das CNNs em tarefas de visão computacional deve-se à sua capacidade de identificar características locais de forma hierárquica: as camadas iniciais capturam padrões simples (orientação dos dedos, curvatura das juntas) e as camadas mais profundas combinam esses padrões em representações de alto nível (configuração completa da mão). Essa configuração garante maior robustez a variações de iluminação e enquadramento \cite{Furtado2019}.
 
-\textbf{2.3.8 Redes de Memória de Longo Prazo (LSTM)}
+\subsubsection*{\textbf{2.3.8 Redes de Memória de Longo Prazo (LSTM)}}
 
 Para o reconhecimento de sinais dinâmicos em vídeo, onde o significado do gesto reside no movimento ao longo do tempo, utiliza-se a Long Short-Term Memory (LSTM). Esta arquitetura é uma evolução das Redes Neurais Recorrentes (RNN) tradicionais, introduzida por \citeonline{Hochreiter1997} para solucionar a limitação do desaparecimento do gradiente (vanishing gradient), que impede redes comuns de aprenderem dependências de longo prazo em sequências de dados.
 
@@ -382,18 +408,65 @@ Além disso, a variabilidade entre usuários introduz complexidade, uma vez que 
 Por fim, a influência do fundo da imagem (background) pode impactar a precisão, especialmente em cenários com muitos objetos ou cores semelhantes ao tom da pele humana, o que torna essencial o uso de filtros adaptativos ou técnicas de segmentação para isolar adequadamente a mão do restante da cena \cite{Monteiro2016}.
 
 \textbf{2.3.11 Processamento de Linguagem Natural (NLP)}
-O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto quanto de voz. Segundo \citeonline{IBM2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
-
-No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão computacional não é suficiente para uma comunicação fluida, dada a profunda divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam \citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite que o sistema lide com a ambiguidade inerente à linguagem e aprenda representações hierárquicas dos dados textuais. O módulo de NLP atua, portanto, como uma camada de pós-processamento essencial, realizando a conversão semântica e sintática dos sinais identificados pela rede neural.
-
-Este fundamento permite que o sistema organize os "tokens", definidos como os sinais ou palavras isoladas identificados nas etapas anteriores, em frases coerentes e gramaticalmente corretas. 
-
-Para isso, aplicam-se técnicas de processamento que ajustam a sintaxe e a gramática, reordenando os elementos para adequá-los à estrutura da língua portuguesa, visto que a Libras frequentemente utiliza organizações frasais distintas, como a estrutura Objeto-Sujeito-Verbo. 
-
-Paralelamente, o módulo assegura a integridade semântica da tradução, garantindo que o sentido original da mensagem seja preservado durante a conversão entre as modalidades. 
-
-Por fim, o tratamento de variações linguísticas resolve questões essenciais de concordância nominal e verbal, além de refinar a estrutura frasal, resultando em uma saída de texto que seja natural e compreensível para o usuário ouvinte \cite{Lopez2017}.
-
+O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial
+que visa capacitar sistemas computacionais a compreender, interpretar e gerar
+a linguagem humana, tanto em formato de texto. Segundo
+\citeonline{Stryker2024}, o NLP combina a linguística estatística e
+computacional com modelos de aprendizado profundo para processar a linguagem
+em formas que exibam compreensão de significado e intenção.
+ 
+No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão
+computacional não é suficiente para uma comunicação fluida, dada a profunda
+divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam
+\citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite
+que o sistema lide com a ambiguidade inerente à linguagem e aprenda
+representações hierárquicas dos dados textuais. O módulo de NLP atua,
+portanto, como uma camada de pós-processamento essencial, realizando a
+conversão semântica e sintática dos sinais identificados pela rede neural.
+  
+A abordagem adotada neste trabalho é um pipeline de processamento
+sequencial, implementado com a biblioteca spaCy
+\cite{Honnibal2020}, composta por 4 etapas, tokenização e normalização, etiquetagem morfossintática, análise de dependência sintática e reordenação sintática e concordância.
+  
+  Os sinais identificados pela etapa de visão computacional chegam ao módulo
+  de NLP como uma sequência de \textit{tokens}, palavras isoladas na estrutura
+  da Libras (ex.: \texttt{[VOCÊ, QUERER, ÁGUA]}). A tokenização consiste em
+  tratar cada sinal como uma unidade lexical discreta, e a normalização realiza
+  a lematização de cada token, reduzindo as formas flexionadas à forma canônica
+  (lema), o que facilita o mapeamento para o português \cite{Bird2009}.
+ 
+  Cada token recebe uma etiqueta morfossintática (substantivo, verbo, pronome,
+  etc.). No spaCy, esse processo é realizado por um modelo de rede neural
+  treinado sobre corpora anotados \cite{Honnibal2020}. Formalmente, dado
+  um vocabulário $\mathcal{V}$ e um conjunto de etiquetas $\mathcal{T}$, o
+  \textit{tagger} aprende uma função $f: \mathcal{V}^n \rightarrow \mathcal{T}^n$
+  que maximiza a probabilidade conjunta da sequência de etiquetas dado o
+  contexto da sentença.
+ 
+  Após a etiquetagem, o analisador de dependências identifica as relações
+  gramaticais entre os tokens (sujeito, objeto, modificador, etc.), produzindo
+  uma árvore de dependência sintática.
+ 
+  Com base nas relações identificadas pela árvore de dependência, o módulo
+  reordena os tokens segundo a estrutura SVO do português e aplica regras de
+  concordância nominal e verbal. Por exemplo, a sequência da Libras
+  \texttt{[VOCÊ, QUERER, ÁGUA]} é reescrita como \textit{``Você quer água.''},
+  com a flexão verbal adequada ao sujeito identificado \cite{Lopez2017}.
+ 
+  
+Formalmente, seja $S_L = (w_1, w_2, \ldots, w_n)$ a sequência de sinais
+identificados na estrutura da Libras e $S_P$ a frase-alvo em português. O
+módulo de NLP aprende uma função de reordenação $\pi$ tal que:
+ 
+\begin{equation}
+    S_P = \text{Flexão}\bigl(\pi(S_L),\; G_{\text{pt}}\bigr)
+\end{equation}
+ 
+onde $\pi$ é uma permutação dos índices dos tokens guiada pelas relações de
+dependência e $G_{\text{pt}}$ representa as regras gramaticais do português,
+incluindo concordância de gênero, número e tempo verbal
+\cite{Bird2009}.
+ 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\textwidth]{./figuras/processamento-de-imagem-nlp}
@@ -401,6 +474,61 @@ Por fim, o tratamento de variações linguísticas resolve questões essenciais 
     \source{Autoria própria (2026).}
 \end{figure}
 
+\subsection{Árvores de Dependência Sintática}
+Uma árvore de dependência sintática é uma estrutura de dados que
+representa as relações gramaticais binárias e assimétricas entre os tokens de
+uma sentença. Diferentemente das gramáticas de constituintes (baseadas em
+sintagmas), a análise de dependência conecta diretamente pares de palavras:
+uma cabeça e um dependente, com uma etiqueta que nomeia o tipo de relação
+(\textit{nsubj} para sujeito nominal, \textit{obj} para objeto direto,
+\textit{advmod} para modificador adverbial, etc.) \cite{Jurafsky2023}.
+ 
+Formalmente, dada uma sentença $s = (w_1, w_2, \ldots, w_n)$, uma árvore de
+dependência é um grafo dirigido $G = (V, A)$ onde:
+ 
+\begin{itemize}
+    \item $V = \{w_0, w_1, \ldots, w_n\}$ é o conjunto de vértices (tokens
+    mais um nó raiz artificial $w_0$);
+    \item $A \subseteq V \times V \times \mathcal{R}$ é o conjunto de arcos
+    rotulados, onde cada arco $(w_i, w_j, r)$ indica que $w_i$ é a cabeça de
+    $w_j$ com relação do tipo $r \in \mathcal{R}$;
+    \item cada token (exceto a raiz) possui exatamente uma cabeça, garantindo
+    a estrutura de árvore \cite{Jurafsky2023}.
+\end{itemize}
+ 
+Como exemplo, considere a sentença \textit{``Você quer água.''} Sua árvore de
+dependência teria \textit{quer} como raiz (verbo principal), com \textit{Você}
+ligado a ela pelo arco \texttt{nsubj} (sujeito nominal) e \textit{água} pelo
+arco \texttt{obj} (objeto direto).
+  
+No presente trabalho, a análise de dependência é realizada pela biblioteca
+\textbf{spaCy} \cite{Honnibal2020}, que implementa um analisador
+neural baseado em transições (\textit{transition-based parser}). Esse analisador
+processa a sentença da esquerda para a direita, mantendo uma pilha e uma fila
+de tokens, e a cada passo aplica uma das três operações possíveis:
+\textit{SHIFT} (empilha o próximo token), \textit{LEFT-ARC} (cria um arco da
+cabeça para o dependente à esquerda) ou \textit{RIGHT-ARC} (cria um arco da
+cabeça para o dependente à direita). A escolha da operação é feita por um
+classificador neural que considera o contexto da pilha e da fila
+\cite{Honnibal2020}.
+  
+A adoção de árvores de dependência é especialmente adequada para este projeto
+por três razões. Primeiro, como a Libras apresenta ordem frasal flexível (SVO, SOV,
+OSV, entre outras), a análise
+de dependência é robusta a variações de ordem, pois identifica as relações
+semânticas independentemente da posição linear dos tokens
+\cite{Jurafsky2023}. Segundo, a estrutura arbórea explicita quais
+tokens são sujeito, objeto e predicado, fornecendo ao módulo de reordenação
+a informação necessária para reconstruir a sentença na estrutura SVO do
+português. Terceiro, as etiquetas de dependência permitem aplicar regras de
+concordância dirigidas: identificado o sujeito (\texttt{nsubj}), é possível
+flexionar o verbo-cabeça no número e pessoa correspondentes
+\cite{Bird2009}.
+ 
+Dessa forma, as árvores de dependência atuam como a representação
+intermediária que conecta a saída do reconhecedor de gestos (sequência de
+tokens na ordem da Libras) à frase final gramaticalmente correta em português,
+tornando o pipeline de tradução mais explícito, interpretável e extensível.
 
 \textbf{2.3.12 Latência e Tempo de Resposta}
 
