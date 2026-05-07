@@ -248,7 +248,7 @@ A escolha das arquiteturas utilizadas neste trabalho está diretamente relaciona
 Essa distinção impõe desafios específicos ao processo de tradução automática, exigindo o uso de técnicas capazes de lidar tanto com a análise espacial dos sinais quanto com sua evolução temporal e posterior reorganização linguística. Nesse contexto, são empregadas Redes Neurais Convolucionais para captura de padrões visuais, Redes LSTM para modelagem de sequências de movimento e técnicas de Processamento de Linguagem Natural para adaptação da estrutura gramatical ao português.
 
 
-\textbf{2.3.1 Linguagem da Língua Brasileira de Sinais (Libras)} \\
+\subsection{Linguagem da Língua Brasileira de Sinais (Libras)}
 
 A Língua Brasileira de Sinais (Libras) é uma língua natural, completa e autônoma, utilizada pela comunidade surda no Brasil, reconhecida pela Lei nº 10.436/2002 e regulamentada pelo Decreto nº 5.626/2005 como meio legal de comunicação e expressão. Possui estrutura gramatical própria, independente da Língua Portuguesa, e está inserida em um contexto cultural e linguístico específico da comunidade surda.
 
@@ -263,7 +263,7 @@ No nível sintático, a língua portuguesa segue predominantemente a ordem Sujei
 Essas diferenças impactam diretamente o processo de tradução automática. Elementos comuns no português, como artigos e preposições, nem sempre aparecem de forma explícita na Libras, pois muitas dessas relações são expressas pelo uso do espaço e pelo contexto. Por isso, sistemas computacionais precisam não apenas reconhecer os sinais, mas também reorganizar as informações e incluir elementos necessários para gerar frases corretas em português.
 
 
-\textbf{2.3.2 Bases de Dados (Datasets)} \\
+\subsection{Bases de Dados (Datasets)}
 
 No desenvolvimento de modelos de Aprendizado Profundo, o dataset (base de dados) constitui o pilar fundamental para o treinamento e a validação do sistema. Segundo \citeonline{Schmidhuber2014}, a eficácia de arquiteturas complexas como CNNs e LSTMs depende diretamente da disponibilidade de grandes volumes de dados rotulados, que permitem ao modelo aprender representações estatísticas precisas e generalizáveis.
 
@@ -277,7 +277,7 @@ No contexto do reconhecimento de Libras, os datasets apresentam desafios únicos
 
 Além disso, a estruturação do dataset deve prever a divisão entre conjuntos de treinamento, validação e teste. Conforme explicam \citeonline{Goodfellow2016}, essa separação é o que permite avaliar a capacidade de generalização do algoritmo frente a dados nunca vistos, assegurando que o tradutor de Libras funcione corretamente em cenários do mundo real e não apenas em ambientes controlados de laboratório.
 
-\textbf{2.3.3 Pré-processamento de Dados} \\
+\subsection{Pré-processamento de Dados}
 
 Antes da aplicação dos modelos de aprendizado profundo, é necessária uma etapa de pré-processamento dos dados visuais, com o objetivo de melhorar a qualidade das informações fornecidas ao sistema e aumentar a precisão do reconhecimento dos sinais.
 
@@ -287,7 +287,7 @@ Outro aspecto relevante é a padronização dos dados de entrada, garantindo que
 
 No contexto deste trabalho, o pré-processamento também inclui a preparação das sequências de vídeo, organizando os frames de forma temporal para posterior análise pelo modelo LSTM.
 
-\textbf{2.3.4 Visão Computacional} \\
+\subsection{Visão Computacional}
 
 A Visão Computacional (VC) é a ciência que permite que máquinas enxerguem e interpretem o meio à sua volta. Através da captura de imagens por câmeras e sensores, o sistema extrai informações significativas que permitem reconhecer e manipular objetos \cite{Milano2014}.
 
@@ -302,7 +302,7 @@ Para viabilizar essas aplicações, utilizam-se técnicas de processamento de im
 Por fim, aplica-se a extração de características para identificar padrões relevantes, como o formato e a trajetória das mãos, permitndo que o sistema identifique pontos específicos, chamados de landmarks, essenciais para a classificação precisa do sinal.
 
 
-\textbf{2.3.5 Landmarks (Pontos-chave)}
+\subsection{Landmarks (Pontos-chave)}
 
 Os landmarks, ou pontos-chave, são coordenadas específicas extraídas de partes relevantes do corpo, como mãos, dedos e articulações, utilizadas para representar a geometria e o movimento dos sinais.
 
@@ -312,7 +312,7 @@ Ferramentas como o Google MediaPipe possibilitam a detecção desses pontos em t
 
 Dessa forma, os landmarks atuam como uma representação compacta e informativa dos sinais, facilitando tanto o processamento pelas redes neurais quanto a generalização do modelo para diferentes usuários.
 
-\textbf{2.3.6 Deep Learning}
+\subsection{Deep Learning}
 
 O Deep Learning, ou Aprendizado Profundo, é uma subárea do aprendizado de máquina que utiliza redes neurais artificiais com múltiplas camadas de processamento. Segundo a \citeonline{IBM2026}, essa abordagem é inspirada na estrutura do cérebro humano, onde cada camada de "neurônios" executa operações matemáticas para aprender representações cada vez mais abstratas dos dados.
 
@@ -326,7 +326,7 @@ A relação direta com as arquiteturas CNN e LSTM ocorre porque o aprendizado pr
 
 Dessa forma, a profundidade dessas redes permite que o sistema capture desde detalhes mínimos de um frame até o contexto completo de uma frase em Libras. Conforme destacam \citeonline{Fleck2016}, essa estrutura multicamada é essencial para que o modelo aprenda padrões que seriam invisíveis para algoritmos de aprendizado mais simples.
 
-\subsubsection*{\textbf{2.3.7 Redes Neurais Convolucionais (CNN)}}
+\subsection{Redes Neurais Convolucionais (CNN)}
 
 As Redes Neurais Convolucionais (CNN) são arquiteturas de aprendizado profundo especializadas no processamento de dados com topologia em grade, como imagens e sequências. Introduzidas por \citeonline{Lecun1998} e popularizadas com o modelo AlexNet \cite{Krizhevsky2012}, as CNNs revolucionaram o campo da visão computacional ao substituir a extração manual de características por um processo de aprendizado automático e hierárquico.
  
@@ -358,7 +358,7 @@ No contexto deste projeto, os \textit{landmarks} extraídos pelo MediaPipe (coor
 
 Conforme apontam \citeonline{Fleck2016}, o sucesso das CNNs em tarefas de visão computacional deve-se à sua capacidade de identificar características locais de forma hierárquica: as camadas iniciais capturam padrões simples (orientação dos dedos, curvatura das juntas) e as camadas mais profundas combinam esses padrões em representações de alto nível (configuração completa da mão). Essa configuração garante maior robustez a variações de iluminação e enquadramento \cite{Furtado2019}.
 
-\subsubsection*{\textbf{2.3.8 Redes de Memória de Longo Prazo (LSTM)}}
+\subsection{Redes de Memória de Longo Prazo (LSTM)}
 
 Para o reconhecimento de sinais dinâmicos em vídeo, onde o significado do gesto reside no movimento ao longo do tempo, utiliza-se a Long Short-Term Memory (LSTM). Esta arquitetura é uma evolução das Redes Neurais Recorrentes (RNN) tradicionais, introduzida por \citeonline{Hochreiter1997} para solucionar a limitação do desaparecimento do gradiente (vanishing gradient), que impede redes comuns de aprenderem dependências de longo prazo em sequências de dados.
 
@@ -381,7 +381,7 @@ No contexto do tradutor de Libras, essa capacidade de retenção temporal permit
     \source{Autoria própria (2026).}
 \end{figure}
 
-\textbf{2.3.9 Custo Computacional e Peso dos Modelos}
+\subsection{Custo Computacional e Peso dos Modelos}
 
 O custo computacional refere-se à quantidade de recursos necessários para executar um modelo, incluindo uso de memória, processamento e capacidade de armazenamento. Já o peso do modelo está relacionado ao número de parâmetros treináveis presentes na rede neural, influenciando diretamente seu tamanho e complexidade.
 
@@ -391,7 +391,7 @@ No contexto deste trabalho, a escolha das arquiteturas busca equilibrar desempen
 
 Esse equilíbrio é fundamental para garantir que o sistema seja não apenas preciso, mas também utilizável em cenários práticos.
 
-\textbf{2.3.10 Reconhecimento de Gestos (Gesture Recognition)}
+\subsection{Reconhecimento de Gestos (Gesture Recognition)}
 
 O reconhecimento de gestos é uma parte da visão computacional que visa identificar e interpretar movimentos ou posições do corpo humano a partir de dados visuais, transformando-os em comandos ou símbolos compreensíveis por máquinas \cite{Silva2017}. No contexto da Língua Brasileira de Sinais (Libras), essa técnica é o pilar fundamental para a tradução automatizada, permitindo que a interação entre surdos e ouvintes ocorra de forma fluida através da interface homem-máquina \cite{Bittencourt2002}.
 
@@ -407,65 +407,29 @@ Além disso, a variabilidade entre usuários introduz complexidade, uma vez que 
 
 Por fim, a influência do fundo da imagem (background) pode impactar a precisão, especialmente em cenários com muitos objetos ou cores semelhantes ao tom da pele humana, o que torna essencial o uso de filtros adaptativos ou técnicas de segmentação para isolar adequadamente a mão do restante da cena \cite{Monteiro2016}.
 
-\textbf{2.3.11 Processamento de Linguagem Natural (NLP)}
-O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial
-que visa capacitar sistemas computacionais a compreender, interpretar e gerar
-a linguagem humana, tanto em formato de texto. Segundo
-\citeonline{Stryker2024}, o NLP combina a linguística estatística e
-computacional com modelos de aprendizado profundo para processar a linguagem
-em formas que exibam compreensão de significado e intenção.
+\subsection{Processamento de Linguagem Natural (NLP)}
+
+O Processamento de Linguagem Natural é uma vertente da Inteligência Artificial que visa capacitar sistemas computacionais a compreender, interpretar e gerar a linguagem humana, tanto em formato de texto. Segundo \citeonline{Stryker2024}, o NLP combina a linguística estatística e computacional com modelos de aprendizado profundo para processar a linguagem em formas que exibam compreensão de significado e intenção.
  
-No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão
-computacional não é suficiente para uma comunicação fluida, dada a profunda
-divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam
-\citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite
-que o sistema lide com a ambiguidade inerente à linguagem e aprenda
-representações hierárquicas dos dados textuais. O módulo de NLP atua,
-portanto, como uma camada de pós-processamento essencial, realizando a
-conversão semântica e sintática dos sinais identificados pela rede neural.
+No escopo deste projeto, o reconhecimento isolado de gestos por meio de visão computacional não é suficiente para uma comunicação fluida, dada a profunda divergência gramatical entre a Libras e a língua portuguesa. Conforme apontam \citeonline{Lopez2017}, o uso de redes neurais aplicadas ao NLP permite que o sistema lide com a ambiguidade inerente à linguagem e aprenda representações hierárquicas dos dados textuais. O módulo de NLP atua, portanto, como uma camada de pós-processamento essencial, realizando a conversão semântica e sintática dos sinais identificados pela rede neural.
   
-A abordagem adotada neste trabalho é um pipeline de processamento
-sequencial, implementado com a biblioteca spaCy
-\cite{Honnibal2020}, composta por 4 etapas, tokenização e normalização, etiquetagem morfossintática, análise de dependência sintática e reordenação sintática e concordância.
+A abordagem adotada neste trabalho é um pipeline de processamento sequencial, implementado com a biblioteca spaCy \cite{Honnibal2020}, composta por 4 etapas, tokenização e normalização, etiquetagem morfossintática, análise de dependência sintática e reordenação sintática e concordância.
   
-  Os sinais identificados pela etapa de visão computacional chegam ao módulo
-  de NLP como uma sequência de \textit{tokens}, palavras isoladas na estrutura
-  da Libras (ex.: \texttt{[VOCÊ, QUERER, ÁGUA]}). A tokenização consiste em
-  tratar cada sinal como uma unidade lexical discreta, e a normalização realiza
-  a lematização de cada token, reduzindo as formas flexionadas à forma canônica
-  (lema), o que facilita o mapeamento para o português \cite{Bird2009}.
+Os sinais identificados pela etapa de visão computacional chegam ao módulo de NLP como uma sequência de \textit{tokens}, palavras isoladas na estrutura da Libras (ex.: \texttt{[VOCÊ, QUERER, ÁGUA]}). A tokenização consiste em tratar cada sinal como uma unidade lexical discreta, e a normalização realiza a lematização de cada token, reduzindo as formas flexionadas à forma canônica (lema), o que facilita o mapeamento para o português \cite{Bird2009}.
  
-  Cada token recebe uma etiqueta morfossintática (substantivo, verbo, pronome,
-  etc.). No spaCy, esse processo é realizado por um modelo de rede neural
-  treinado sobre corpora anotados \cite{Honnibal2020}. Formalmente, dado
-  um vocabulário $\mathcal{V}$ e um conjunto de etiquetas $\mathcal{T}$, o
-  \textit{tagger} aprende uma função $f: \mathcal{V}^n \rightarrow \mathcal{T}^n$
-  que maximiza a probabilidade conjunta da sequência de etiquetas dado o
-  contexto da sentença.
+Cada token recebe uma etiqueta morfossintática (substantivo, verbo, pronome, etc.). No spaCy, esse processo é realizado por um modelo de rede neural treinado sobre corpora anotados \cite{Honnibal2020}. Formalmente, dado um vocabulário $\mathcal{V}$ e um conjunto de etiquetas $\mathcal{T}$, o \textit{tagger} aprende uma função $f: \mathcal{V}^n \rightarrow \mathcal{T}^n$ que maximiza a probabilidade conjunta da sequência de etiquetas dado o contexto da sentença.
  
-  Após a etiquetagem, o analisador de dependências identifica as relações
-  gramaticais entre os tokens (sujeito, objeto, modificador, etc.), produzindo
-  uma árvore de dependência sintática.
+Após a etiquetagem, o analisador de dependências identifica as relações gramaticais entre os tokens (sujeito, objeto, modificador, etc.), produzindo uma árvore de dependência sintática.
  
-  Com base nas relações identificadas pela árvore de dependência, o módulo
-  reordena os tokens segundo a estrutura SVO do português e aplica regras de
-  concordância nominal e verbal. Por exemplo, a sequência da Libras
-  \texttt{[VOCÊ, QUERER, ÁGUA]} é reescrita como \textit{``Você quer água.''},
-  com a flexão verbal adequada ao sujeito identificado \cite{Lopez2017}.
- 
+Com base nas relações identificadas pela árvore de dependência, o módulo reordena os tokens segundo a estrutura SVO do português e aplica regras de concordância nominal e verbal. Por exemplo, a sequência da Libras \texttt{[VOCÊ, QUERER, ÁGUA]} é reescrita como \textit{``Você quer água.''}, com a flexão verbal adequada ao sujeito identificado \cite{Lopez2017}.
   
-Formalmente, seja $S_L = (w_1, w_2, \ldots, w_n)$ a sequência de sinais
-identificados na estrutura da Libras e $S_P$ a frase-alvo em português. O
-módulo de NLP aprende uma função de reordenação $\pi$ tal que:
- 
+Formalmente, seja $S_L = (w_1, w_2, \ldots, w_n)$ a sequência de sinais identificados na estrutura da Libras e $S_P$ a frase-alvo em português. O módulo de NLP aprende uma função de reordenação $\pi$ tal que: 
+
 \begin{equation}
     S_P = \text{Flexão}\bigl(\pi(S_L),\; G_{\text{pt}}\bigr)
 \end{equation}
  
-onde $\pi$ é uma permutação dos índices dos tokens guiada pelas relações de
-dependência e $G_{\text{pt}}$ representa as regras gramaticais do português,
-incluindo concordância de gênero, número e tempo verbal
-\cite{Bird2009}.
+onde $\pi$ é uma permutação dos índices dos tokens guiada pelas relações de dependência e $G_{\text{pt}}$ representa as regras gramaticais do português, incluindo concordância de gênero, número e tempo verbal \cite{Bird2009}.
  
 \begin{figure}[H]
     \centering
@@ -475,62 +439,26 @@ incluindo concordância de gênero, número e tempo verbal
 \end{figure}
 
 \subsection{Árvores de Dependência Sintática}
-Uma árvore de dependência sintática é uma estrutura de dados que
-representa as relações gramaticais binárias e assimétricas entre os tokens de
-uma sentença. Diferentemente das gramáticas de constituintes (baseadas em
-sintagmas), a análise de dependência conecta diretamente pares de palavras:
-uma cabeça e um dependente, com uma etiqueta que nomeia o tipo de relação
-(\textit{nsubj} para sujeito nominal, \textit{obj} para objeto direto,
-\textit{advmod} para modificador adverbial, etc.) \cite{Jurafsky2023}.
+
+Uma árvore de dependência sintática é uma estrutura de dados que representa as relações gramaticais binárias e assimétricas entre os tokens de uma sentença. Diferentemente das gramáticas de constituintes (baseadas em sintagmas), a análise de dependência conecta diretamente pares de palavras: uma cabeça e um dependente, com uma etiqueta que nomeia o tipo de relação (\textit{nsubj} para sujeito nominal, \textit{obj} para objeto direto, \textit{advmod} para modificador adverbial, etc.) \cite{Jurafsky2023}.
  
-Formalmente, dada uma sentença $s = (w_1, w_2, \ldots, w_n)$, uma árvore de
-dependência é um grafo dirigido $G = (V, A)$ onde:
+Formalmente, dada uma sentença $s = (w_1, w_2, \ldots, w_n)$, uma árvore de dependência é um grafo dirigido $G = (V, A)$ onde:
  
 \begin{itemize}
-    \item $V = \{w_0, w_1, \ldots, w_n\}$ é o conjunto de vértices (tokens
-    mais um nó raiz artificial $w_0$);
-    \item $A \subseteq V \times V \times \mathcal{R}$ é o conjunto de arcos
-    rotulados, onde cada arco $(w_i, w_j, r)$ indica que $w_i$ é a cabeça de
-    $w_j$ com relação do tipo $r \in \mathcal{R}$;
-    \item cada token (exceto a raiz) possui exatamente uma cabeça, garantindo
-    a estrutura de árvore \cite{Jurafsky2023}.
+    \item $V = \{w_0, w_1, \ldots, w_n\}$ é o conjunto de vértices (tokens mais um nó raiz artificial $w_0$);
+    \item $A \subseteq V \times V \times \mathcal{R}$ é o conjunto de arcos rotulados, onde cada arco $(w_i, w_j, r)$ indica que $w_i$ é a cabeça de $w_j$ com relação do tipo $r \in \mathcal{R}$;
+    \item cada token (exceto a raiz) possui exatamente uma cabeça, garantindo a estrutura de árvore \cite{Jurafsky2023}.
 \end{itemize}
  
-Como exemplo, considere a sentença \textit{``Você quer água.''} Sua árvore de
-dependência teria \textit{quer} como raiz (verbo principal), com \textit{Você}
-ligado a ela pelo arco \texttt{nsubj} (sujeito nominal) e \textit{água} pelo
-arco \texttt{obj} (objeto direto).
+Como exemplo, considere a sentença \textit{``Você quer água.''} Sua árvore de dependência teria \textit{quer} como raiz (verbo principal), com \textit{Você} ligado a ela pelo arco \texttt{nsubj} (sujeito nominal) e \textit{água} pelo arco \texttt{obj} (objeto direto).
   
-No presente trabalho, a análise de dependência é realizada pela biblioteca
-\textbf{spaCy} \cite{Honnibal2020}, que implementa um analisador
-neural baseado em transições (\textit{transition-based parser}). Esse analisador
-processa a sentença da esquerda para a direita, mantendo uma pilha e uma fila
-de tokens, e a cada passo aplica uma das três operações possíveis:
-\textit{SHIFT} (empilha o próximo token), \textit{LEFT-ARC} (cria um arco da
-cabeça para o dependente à esquerda) ou \textit{RIGHT-ARC} (cria um arco da
-cabeça para o dependente à direita). A escolha da operação é feita por um
-classificador neural que considera o contexto da pilha e da fila
-\cite{Honnibal2020}.
+No presente trabalho, a análise de dependência é realizada pela biblioteca spaCy \cite{Honnibal2020}, que implementa um analisador neural baseado em transições (\textit{transition-based parser}). Esse analisador processa a sentença da esquerda para a direita, mantendo uma pilha e uma fila de tokens, e a cada passo aplica uma das três operações possíveis: \textit{SHIFT} (empilha o próximo token), \textit{LEFT-ARC} (cria um arco da cabeça para o dependente à esquerda) ou \textit{RIGHT-ARC} (cria um arco da cabeça para o dependente à direita). A escolha da operação é feita por um classificador neural que considera o contexto da pilha e da fila \cite{Honnibal2020}.
   
-A adoção de árvores de dependência é especialmente adequada para este projeto
-por três razões. Primeiro, como a Libras apresenta ordem frasal flexível (SVO, SOV,
-OSV, entre outras), a análise
-de dependência é robusta a variações de ordem, pois identifica as relações
-semânticas independentemente da posição linear dos tokens
-\cite{Jurafsky2023}. Segundo, a estrutura arbórea explicita quais
-tokens são sujeito, objeto e predicado, fornecendo ao módulo de reordenação
-a informação necessária para reconstruir a sentença na estrutura SVO do
-português. Terceiro, as etiquetas de dependência permitem aplicar regras de
-concordância dirigidas: identificado o sujeito (\texttt{nsubj}), é possível
-flexionar o verbo-cabeça no número e pessoa correspondentes
-\cite{Bird2009}.
+A adoção de árvores de dependência é especialmente adequada para este projeto por três razões. Primeiro, como a Libras apresenta ordem frasal flexível (SVO, SOV, OSV, entre outras), a análise de dependência é robusta a variações de ordem, pois identifica as relações semânticas independentemente da posição linear dos tokens \cite{Jurafsky2023}. Segundo, a estrutura arbórea explicita quais tokens são sujeito, objeto e predicado, fornecendo ao módulo de reordenação a informação necessária para reconstruir a sentença na estrutura SVO do português. Terceiro, as etiquetas de dependência permitem aplicar regras de concordância dirigidas: identificado o sujeito (\texttt{nsubj}), é possível flexionar o verbo-cabeça no número e pessoa correspondentes \cite{Bird2009}.
  
-Dessa forma, as árvores de dependência atuam como a representação
-intermediária que conecta a saída do reconhecedor de gestos (sequência de
-tokens na ordem da Libras) à frase final gramaticalmente correta em português,
-tornando o pipeline de tradução mais explícito, interpretável e extensível.
+Dessa forma, as árvores de dependência atuam como a representação intermediária que conecta a saída do reconhecedor de gestos (sequência de tokens na ordem da Libras) à frase final gramaticalmente correta em português, tornando o pipeline de tradução mais explícito, interpretável e extensível.
 
-\textbf{2.3.12 Latência e Tempo de Resposta}
+\subsection{Latência e Tempo de Resposta}
 
 A latência corresponde ao tempo decorrido entre a captura do sinal pelo sistema e a exibição da tradução ao usuário. Em aplicações de tradução em tempo real, esse fator é crítico, pois impacta diretamente a experiência de uso e a fluidez da comunicação.
 
@@ -542,7 +470,7 @@ No presente trabalho, a latência será considerada como um dos principais crit�
 
 Dessa forma, busca-se garantir que a tradução ocorra de forma rápida e contínua, aproximando-se de uma comunicação natural.
 
-\textbf{2.3.13 Integração Visão Computacional + NLP}
+\subsection{Integração Visão Computacional + NLP}
 
 A integração entre visão computacional e processamento de linguagem natural é essencial para o funcionamento do sistema proposto. Essa combinação permite não apenas reconhecer os sinais, mas também convertê-los em linguagem compreensível.
 
@@ -650,79 +578,66 @@ Neste capítulo, apresenta-se a solução proposta para o problema de tradução
 \section{Solução proposta}
 \label{sec:solucao}
 
+\subsection{Visão geral da solução}
+A solução proposta consiste em um sistema desktop de tradução automática em tempo execução, capaz de reconhecer gestos da Língua Brasileira de Sinais por meio de visão computacional e convertê-los em texto da língua portuguesa. O sistema é voltado para uso em computadores com câmera integrada, sendo projetado para funcionar como um facilitador de comunicação em contextos como atendimentos, ambientes educacionais e interações cotidianas.
+
+A aplicação é composta por três módulos principais integrados em um pipeline de processamento sequencial: (i) o módulo de visão computacional, responsável pela captura e reconhecimento dos sinais; (ii) o módulo de processamento de linguagem natural, responsável pela conversão dos tokens reconhecidos em frases coerentes em português; e (iii) a interface do usuário, que exibe a tradução em tempo execução.
+
+Em razão da amplitude lexical da Libras e do caráter experimental deste estudo, o vocabulário inicial do sistema abrangerá um conjunto definido de sinais voltados a contextos de comunicação básica, como cumprimentos, solicitações de ajuda, identificação pessoal e situações de atendimento.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{./figuras/execução-pipeline}
+    \caption{Fluxograma de Execução do Pipeline.}
+    \source{Autoria própria (2026).}
+\end{figure}
+\subsection{Arquitetura}
+A arquitetura do sistema é organizada de forma modular, dividida em três camadas principais de processamento que interagem sequencialmente para garantir a precisão da tradução:
+\begin{enumerate}
+    \item Camada de Aquisição e Visão (Front-end/Captura): Responsável por receber o fluxo de vídeo e utilizar algoritmos de extração de landmarks para isolar os movimentos das mãos e do corpo.
+    \item Camada de Inteligência (Processamento Híbrido): O núcleo da solução, onde Redes Neurais Convolucionais (CNN) processam a geometria espacial de cada frame e Redes de Memória de Longo Prazo (LSTM) interpretam a continuidade temporal dos movimentos.
+    \item Camada de Interpretação Linguística (NLP): Módulo que recebe os sinais identificados (tokens) e aplica regras de Processamento de Linguagem Natural para gerar frases gramaticalmente corretas em língua portuguesa.
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./figuras/visao-computacional.png}
+    \caption{Fluxo de Processamento da Arquitetura Híbrida.}
+    \source{Autoria própria (2026).}
+\end{figure}
+\subsection{Tecnologias e ferramentas}
+As escolhas tecnológicas foram feitas visando o alto desempenho em processamento de tensores e visão computacional:
 \begin{itemize}
-
-    \item \textbf{Visão geral da solução} \\
-    A solução proposta consiste em um sistema desktop de tradução automática em tempo execução, capaz de reconhecer gestos da Língua Brasileira de Sinais por meio de visão computacional e convertê-los em texto da língua portuguesa. O sistema é voltado para uso em computadores com câmera integrada, sendo projetado para funcionar como um facilitador de comunicação em contextos como atendimentos, ambientes educacionais e interações cotidianas.
-    
-    A aplicação é composta por três módulos principais integrados em um pipeline de processamento sequencial: (i) o módulo de visão computacional, responsável pela captura e reconhecimento dos sinais; (ii) o módulo de processamento de linguagem natural, responsável pela conversão dos tokens reconhecidos em frases coerentes em português; e (iii) a interface do usuário, que exibe a tradução em tempo execução.
-    
-    Em razão da amplitude lexical da Libras e do caráter experimental deste estudo, o vocabulário inicial do sistema abrangerá um conjunto definido de sinais voltados a contextos de comunicação básica, como cumprimentos, solicitações de ajuda, identificação pessoal e situações de atendimento.
-
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.4\textwidth]{./figuras/execução-pipeline}
-        \caption{Fluxograma de Execução do Pipeline.}
-        \source{Autoria própria (2026).}
-    \end{figure}
-
-    \item \textbf{Arquitetura}\\
-    A arquitetura do sistema é organizada de forma modular, dividida em três camadas principais de processamento que interagem sequencialmente para garantir a precisão da tradução:
-    \begin{enumerate}
-        \item Camada de Aquisição e Visão (Front-end/Captura): Responsável por receber o fluxo de vídeo e utilizar algoritmos de extração de landmarks para isolar os movimentos das mãos e do corpo.
-        \item Camada de Inteligência (Processamento Híbrido): O núcleo da solução, onde Redes Neurais Convolucionais (CNN) processam a geometria espacial de cada frame e Redes de Memória de Longo Prazo (LSTM) interpretam a continuidade temporal dos movimentos.
-        \item Camada de Interpretação Linguística (NLP): Módulo que recebe os sinais identificados (tokens) e aplica regras de Processamento de Linguagem Natural para gerar frases gramaticalmente corretas em língua portuguesa.
-    \end{enumerate}
-
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1.0\textwidth]{./figuras/visao-computacional.png}
-        \caption{Fluxo de Processamento da Arquitetura Híbrida.}
-        \source{Autoria própria (2026).}
-    \end{figure}
-
-    \item \textbf{Tecnologias e ferramentas}\\
-    As escolhas tecnológicas foram feitas visando o alto desempenho em processamento de tensores e visão computacional:
-    \begin{itemize}
-        \item Linguagem de Programação: Python, devido à sua maturidade e vasta biblioteca para IA.
-        \item Frameworks de Inteligência Artificial: TensorFlow ou Keras para o desenvolvimento das arquiteturas CNN e LSTM.
-        \item Visão Computacional: MediaPipe ou OpenCV para a extração ágil de pontos de referência (landmarks) das mãos.
-        \item Dataset: Minds-Libras, Libras Brazilian Sign Language e V-BrasilIL escolhidos pela diversidade de sinais e qualidade das anotações.
-        \item Processamento de Texto: Biblioteca NLTK ou spaCy para as tarefas de NLP e adequação gramatical.
-    \end{itemize}
-
-    \item \textbf{Funcionalidades principais}\\
-    Para atingir os objetivos propostos, o sistema disponibilizará as seguintes funcionalidades:
-    \begin{itemize}
-        \item Captura de Sinais em Tempo Real: Processamento de vídeo via webcam com baixa latência.
-        \item Reconhecimento de Sinais Estáticos e Dinâmicos: Capacidade de traduzir desde o alfabeto manual até gestos complexos em movimento.
-        \begin{figure}[H]
-            \centering
-            \caption{Alfabeto de Libras.} 
-            \label{fig: https://segredosdomundo.r7.com/linguagem-de-sinais-aprenda-algumas-palavras-e-frases-em-libras/}
-            \includegraphics[width=0.8\textwidth]{./figuras/alfabetoLibras.jpg}
-            \vspace{0.3cm}
-            \centerline{\small Fonte: Segredos do Mundo (2026).}
-        \end{figure}
-        \item Tradução Sintática Automática: Reorganização de sentenças da estrutura Libras para a estrutura SVO do português.
-        \item Saída Multimodal: Exibição da tradução em texto na tela.
-    \end{itemize}
-
-    \item \textbf{Metodologia de desenvolvimento}\\
-    O projeto adotará a metodologia ágil Scrum, organizada em ciclos de desenvolvimento (Sprints). A escolha justifica-se pela natureza experimental de modelos de IA, permitindo testes contínuos e ajustes refinados nos hiperparâmetros das redes neurais a cada entrega parcial (prototipação).
-
-    \item \textbf{Critérios de validação}\\
-    O sucesso da solução será medido através de métricas quantitativas e qualitativas:
-    \begin{itemize}
-        \item Acurácia e Precisão: Medição da taxa de acerto do modelo na classificação dos sinais utilizando uma matriz de confusão.
-        \item Métrica BLEU (Bilingual Evaluation Understudy): Utilizada para avaliar a qualidade da tradução gerada pelo módulo de NLP em comparação com traduções humanas.
-        \item Tempo de Resposta: Testes de latência para garantir que a tradução ocorra em tempo quase real.
-        \item Teste de Usabilidade: Avaliação da interface com potenciais usuários para verificar a clareza da tradução apresentada.
-    \end{itemize}
-
+    \item Linguagem de Programação: Python, devido à sua maturidade e vasta biblioteca para IA.
+    \item Frameworks de Inteligência Artificial: TensorFlow ou Keras para o desenvolvimento das arquiteturas CNN e LSTM.
+    \item Visão Computacional: MediaPipe ou OpenCV para a extração ágil de pontos de referência (landmarks) das mãos.
+    \item Dataset: Minds-Libras, Libras Brazilian Sign Language e V-BrasilIL escolhidos pela diversidade de sinais e qualidade das anotações.
+    \item Processamento de Texto: Biblioteca NLTK ou spaCy para as tarefas de NLP e adequação gramatical.
 \end{itemize}
-
-
+\subsection{Funcionalidades principais}
+Para atingir os objetivos propostos, o sistema disponibilizará as seguintes funcionalidades:
+\begin{itemize}
+    \item Captura de Sinais em Tempo Real: Processamento de vídeo via webcam com baixa latência.
+    \item Reconhecimento de Sinais Estáticos e Dinâmicos: Capacidade de traduzir desde o alfabeto manual até gestos complexos em movimento.
+    \begin{figure}[H]
+        \centering
+        \caption{Alfabeto de Libras.} 
+        \label{fig: https://segredosdomundo.r7.com/linguagem-de-sinais-aprenda-algumas-palavras-e-frases-em-libras/}
+        \includegraphics[width=0.8\textwidth]{./figuras/alfabetoLibras.jpg}
+        \vspace{0.3cm}
+        \centerline{\small Fonte: Segredos do Mundo (2026).}
+    \end{figure}
+    \item Tradução Sintática Automática: Reorganização de sentenças da estrutura Libras para a estrutura SVO do português.
+    \item Saída Multimodal: Exibição da tradução em texto na tela.
+\end{itemize}
+\subsection{Metodologia de desenvolvimento}
+O projeto adotará a metodologia ágil Scrum, organizada em ciclos de desenvolvimento (Sprints). A escolha justifica-se pela natureza experimental de modelos de IA, permitindo testes contínuos e ajustes refinados nos hiperparâmetros das redes neurais a cada entrega parcial (prototipação).
+\subsection{Critérios de validação}
+O sucesso da solução será medido através de métricas quantitativas e qualitativas:
+\begin{itemize}
+    \item Acurácia e Precisão: Medição da taxa de acerto do modelo na classificação dos sinais utilizando uma matriz de confusão.
+    \item Métrica BLEU (Bilingual Evaluation Understudy): Utilizada para avaliar a qualidade da tradução gerada pelo módulo de NLP em comparação com traduções humanas.
+    \item Tempo de Resposta: Testes de latência para garantir que a tradução ocorra em tempo quase real.
+    \item Teste de Usabilidade: Avaliação da interface com potenciais usuários para verificar a clareza da tradução apresentada.
+\end{itemize}
 
 % ---------------------------------------------------------------
 \section{Cronograma de trabalho}
